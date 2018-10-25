@@ -187,6 +187,13 @@ Note: this question is not asking you to define the above terms, but to explain 
 Figure 2: The split program to split a single string into a set of lines.
 
 ##### 1. [4 marks] Briefly explain the aim of the condition coverage test input selection strategy.
+
+Each condition in a branch is made to evaluate to true and false at least once. For example, in the branch if(a&&b), a must evaluate to true and false at least once, and so must b.
+
 ##### 2. [6 marks] Draw a control-flow graph for the program in Figure 2.
 ##### 3. [2 marks] List the conditions in the program of Figure 2.
+
+1. text[i] == ’\n’
+2. text[i] != ’\n’
+
 ##### 4. [8 marks] Specify a set of test inputs that achieves branch coverage of your control-flow graph. Briefly explain how the inputs cover the branches.
