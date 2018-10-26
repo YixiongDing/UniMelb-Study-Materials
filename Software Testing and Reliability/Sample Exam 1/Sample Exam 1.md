@@ -191,6 +191,8 @@ Figure 2: The split program to split a single string into a set of lines.
 Each condition in a branch is made to evaluate to true and false at least once. For example, in the branch if(a&&b), a must evaluate to true and false at least once, and so must b.
 
 ##### 2. [6 marks] Draw a control-flow graph for the program in Figure 2.
+<img src="Q4(2).png" alt="550" width="550">
+
 ##### 3. [2 marks] List the conditions in the program of Figure 2.
 1. i < strlen(text) - 1
 2. text[i] != 0
@@ -198,4 +200,10 @@ Each condition in a branch is made to evaluate to true and false at least once. 
 4. text[i] != ’\n’
 
 ##### 4. [8 marks] Specify a set of test inputs that achieves branch coverage of your control-flow graph. Briefly explain how the inputs cover the branches.
+1. text = '', this test will not go into the loop, cover False for the first decision
+2. text = 'hi', this test will successfully go every other branch
+
+
+
+
 
