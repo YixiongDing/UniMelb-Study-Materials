@@ -82,3 +82,8 @@ UDP:
 
 ##### B) Write a multithreaded Java program that responds to remote clients’ requests for meaning of words stored in a Dictionary. If a client program sends a message “King” to the server, the server program responds back with the meaning of word “King” by retrieving it from the dictionary (as a string). Use Java Sockets for communication between clients and the server. [5]
 
+#### Question 4:
+
+##### A) Write a simple CORBA program that demonstrates the invocation of remote object services. For example, when a client sends a message “Hello”, the server responds with “Hi There!”. [5]
+
+##### B) Write a simple RMI program that demonstrates the invocation of remote object services. For example, when a client sends a message “Ping”, the server responds with “Pong”. [5]
