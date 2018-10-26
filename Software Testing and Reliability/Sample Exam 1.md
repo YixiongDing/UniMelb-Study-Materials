@@ -26,6 +26,7 @@ Strength:
 1. Passive oracles are typically easier to implement than active oracles
 2. Less chance of introducing a fault into the oracle itself
 2. Can handle non-determinism, a program is non-deterministic if it can return more than one output for a single input
+
 Weakness:
 
 ##### (ii) [4 marks] The mantra “design for testability” refers to the notion that, when designing software, we should consider the factors of controllability and observability. How do these these two terms related to testing, and what is there importance?
@@ -35,8 +36,7 @@ Weakness:
 
 2. The observability of a software artifact is the degree to which a tester can observe the behaviour of a software artifact, such as its outputs and its effect on its environment
 
-Controllability and observability are properties that are difficult to measure, and are aspects that must be considered
-during the design of software— in other words, software designers must consider designing for testability.
+    Controllability and observability are properties that are difficult to measure, and are aspects that must be considered during the design of software— in other words, software designers must consider designing for testability.
 
 #### Question 2 [20 marks] 
 This question refers to the following specification.
@@ -176,7 +176,7 @@ Note: this question is not asking you to define the above terms, but to explain 
             if (text[i] == ’\n’) {
                 line = line + 1;
                 place = 0; 
-                }
+            }
             page[line][place] = text[i];
             if (text[i] != ’\n’) {
                 place = place + 1;
@@ -192,8 +192,10 @@ Each condition in a branch is made to evaluate to true and false at least once. 
 
 ##### 2. [6 marks] Draw a control-flow graph for the program in Figure 2.
 ##### 3. [2 marks] List the conditions in the program of Figure 2.
-
-1. text[i] == ’\n’
-2. text[i] != ’\n’
+1. i < strlen(text) - 1
+2. text[i] != 0
+3. text[i] == ’\n’
+4. text[i] != ’\n’
 
 ##### 4. [8 marks] Specify a set of test inputs that achieves branch coverage of your control-flow graph. Briefly explain how the inputs cover the branches.
+
