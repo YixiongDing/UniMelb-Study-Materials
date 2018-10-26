@@ -203,7 +203,11 @@ Each condition in a branch is made to evaluate to true and false at least once. 
 1. text = '', this test will not go into the loop, cover False for the first decision
 2. text = 'hi', this test will successfully go every other branch
 
+#### Question 5 [10 marks]
+##### 1. [4 marks] Consider a single mutant that has been generated for a program that we are testing. We have a test suite that reveals no failures in the original program. This test suite is run on the mutant, and again, no failures occur. What does this mean about our test suite?
 
+##### 2. [6 marks] The relational operator replacement rule takes an occurrence of a relational operator, <,≤,>,≥,=, or ̸=, replaces that occurrence with one of every other type of relational operator to generate a set of mutants. A colleague in your quality assurance team hypothesises that boundary-value analysis is required if we want to kill all non-equivalent mutants created by this operator. Do you agree with your colleague? Explain why.
 
+Equivalent Mutant: Given a program and a mutation of that program, the mutant is said to be an equivalent mutant if, for every input, the program and the mutant produce the same output.
 
 
