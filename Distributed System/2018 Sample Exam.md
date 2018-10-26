@@ -51,4 +51,34 @@ Security threats fall into three broad classes:
 
 3. Vandalism -- interference with the proper operation of a system without gain to the perpetrator.
     - Denial of service - flooding a channel or other resource, denying access to others
+    
+#### Question 3:
+##### A) Discuss difference between TCP/IP and UDP protocols for Socket-based communication. [5]
+TCP: 
+1. **Connection**: TCP is a connection-oriented protocol, as a message makes its way across the internet from one computer to another. This is connection based.
+
+2. **Ordering of data packets**: TCP rearranges data packets in the order specified.
+
+3. **Speed of transfer**: The speed for TCP is slower than UDP.
+
+4. **Reliability**: There is absolute guarantee that the data transferred remains intact and arrives in the same order in which it was sent.
+
+5. **Usage**: TCP is suited for applications that require high reliability, and transmission time is relatively less critical.
+
+6. **Handshake**: SYN, SYN-ACK, ACK
+
+UDP: 
+1. **Connection**: UDP is a connectionless protocol, UDP is also a protocol used in message transport or transfer. This is not connection based which means that one program can send a load of packets to another and that would be the end of the relationship.
+
+2. **Ordering of data packets**: UDP has no inherent order as all packets are independent of each other. If ordering is required, it has to be managed by the application layer.
+
+3. **Speed of transfer**: UDP is faster because error recovery is not attempted. It is a "best effort" protocol.
+
+4. **Reliability**: There is no guarantee that the messages or packets sent would reach at all.
+
+5. **Usage**: UDP is suitable for applications that need fast, efficient transmission, such as games. UDP's stateless nature is also useful for servers that answer small queries from huge numbers of clients.
+
+6. **Handshake**: No handshake (connectionless protocol)
+
+##### B) Write a multithreaded Java program that responds to remote clients’ requests for meaning of words stored in a Dictionary. If a client program sends a message “King” to the server, the server program responds back with the meaning of word “King” by retrieving it from the dictionary (as a string). Use Java Sockets for communication between clients and the server. [5]
 
