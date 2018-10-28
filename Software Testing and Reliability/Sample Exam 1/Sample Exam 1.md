@@ -13,7 +13,7 @@ _ _ _
 ##### Answer:
 Active oracle: A program that, given an input for a program-under-test, can generate the expected output of that input.
 
-Strength: 
+Strength: Always exist, often in many varieties. 
 
 Weakness:
 1. If the active oracle is required to simulate the entire program-under-test, it may be as difficult to implement
@@ -27,7 +27,7 @@ Strength:
 2. Less chance of introducing a fault into the oracle itself
 2. Can handle non-determinism, a program is non-deterministic if it can return more than one output for a single input
 
-Weakness:
+Weakness: Does not exist for every program-under-test
 
 ##### (ii) [4 marks] The mantra “design for testability” refers to the notion that, when designing software, we should consider the factors of controllability and observability. How do these these two terms related to testing, and what is there importance?
 ###### Answer:
@@ -61,13 +61,14 @@ The user must perform a send once this data is entered as well.
 ##### 1. [4 marks] Explain the equivalence partitioning strategy for selecting test inputs.
 ##### Answer:
 
- - Phone Number: Applying to guideline 2
+The general method for selecting equivalence classes as follows:
 
- - Password: Applying to guideline 5
+1. Identify the initial equivalence classes (ECs) (using the functional requirements of the program with the help of 6 guidelines) - e.g. “input w. incorrect number” or “input w. incorrect PIN” etc
 
- - Account Codes: Applying to guideline 1
+2. Identify overlapping equivalence classes, and eliminate them by making the overlapping part a new equivalence classes;and...
 
- - Fields: Applying to guideline 2
+3. Select one element from each equivalence class as the test input and work out the expected result for that test input
+
 
 ##### 2. [6 marks] Specify the input conditions for the mobile phone database application described at the start of this question.
 ##### Answer:
@@ -161,8 +162,9 @@ Note: this question is not asking you to define the above terms, but to explain 
  2. d-u anomaly
 
 (ii)
- 1. u-r anomaly indicates that length_a is uninitialised before the it is referenced.
+ 1. u-r anomaly indicates that length_a is uninitialised before it is referenced.
  2. d-u anomaly indicates that length is never referenced before it becomes undefined.
+ 3. u-r anomaly indicates that i is uninitialised before it is referenced.
 
 #### Question 4 [20 marks] 
 ##### The program in Figure 2 takes a single string in the array text and partitions it into an array of lines stored in page. Each time a newline character ‘\n’ is reached a new line is created.
@@ -188,7 +190,7 @@ Figure 2: The split program to split a single string into a set of lines.
 
 ##### 1. [4 marks] Briefly explain the aim of the condition coverage test input selection strategy.
 
-Each condition in a branch is made to evaluate to true and false at least once. For example, in the branch if(a&&b), a must evaluate to true and false at least once, and so must b.
+Aim: To test every condition. Each condition in a branch is made to evaluate to true and false at least once. For example, in the branch if(a&&b), a must evaluate to true and false at least once, and so must b.
 
 ##### 2. [6 marks] Draw a control-flow graph for the program in Figure 2.
 <img src="Q4(2).png" alt="550" width="550">
@@ -206,8 +208,26 @@ Each condition in a branch is made to evaluate to true and false at least once. 
 #### Question 5 [10 marks]
 ##### 1. [4 marks] Consider a single mutant that has been generated for a program that we are testing. We have a test suite that reveals no failures in the original program. This test suite is run on the mutant, and again, no failures occur. What does this mean about our test suite?
 
+##### Answer:
+
+This might be for 2 reasons:
+
+1. It is equivalent mutant
+2. Test suite doesn’t include mutant killer
+
+
+This means that our test case is inadequate, since it fails to uncover at least one possible fault (that was brought by a mutant). If it fails to uncover this slight fault, then it would likely fail to uncover other faults.
+
+
 ##### 2. [6 marks] The relational operator replacement rule takes an occurrence of a relational operator, <,≤,>,≥,=, or ̸=, replaces that occurrence with one of every other type of relational operator to generate a set of mutants. A colleague in your quality assurance team hypothesises that boundary-value analysis is required if we want to kill all non-equivalent mutants created by this operator. Do you agree with your colleague? Explain why.
 
-Equivalent Mutant: Given a program and a mutation of that program, the mutant is said to be an equivalent mutant if, for every input, the program and the mutant produce the same output.
+I would disagree: since the proposed method allows to kill some of the mutants (e.g. > to <), it is useless against others:
+Say, we replaced ≥ with = in (x ≥ 42). On-points for both cases are the same: x = 42. Off-points for (x ≥ 42) is just 41, for (x = 42) - 41 and 43. However, assuming that we don’t know about the mutant, we test only with 41, but not with 43 (which is NOT off-point for the original case), and cannot reveal operator change.
+
+
+### Part B – Software Reliability Modelling
+
+#### Question 6 [6 marks]
+##### Explain what is meant by “software reliability”. Your answer should define software reliability, and explain how the interpretation of failures affect the estimates of failure intensity.
 
 
