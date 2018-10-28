@@ -221,6 +221,8 @@ This means that our test case is inadequate, since it fails to uncover at least 
 
 ##### 2. [6 marks] The relational operator replacement rule takes an occurrence of a relational operator, <,≤,>,≥,=, or ̸=, replaces that occurrence with one of every other type of relational operator to generate a set of mutants. A colleague in your quality assurance team hypothesises that boundary-value analysis is required if we want to kill all non-equivalent mutants created by this operator. Do you agree with your colleague? Explain why.
 
+##### Answer:
+
 I would disagree: since the proposed method allows to kill some of the mutants (e.g. > to <), it is useless against others:
 Say, we replaced ≥ with = in (x ≥ 42). On-points for both cases are the same: x = 42. Off-points for (x ≥ 42) is just 41, for (x = 42) - 41 and 43. However, assuming that we don’t know about the mutant, we test only with 41, but not with 43 (which is NOT off-point for the original case), and cannot reveal operator change.
 
@@ -229,5 +231,10 @@ Say, we replaced ≥ with = in (x ≥ 42). On-points for both cases are the same
 
 #### Question 6 [6 marks]
 ##### Explain what is meant by “software reliability”. Your answer should define software reliability, and explain how the interpretation of failures affect the estimates of failure intensity.
+
+##### Answer:
+
+
+
 
 
