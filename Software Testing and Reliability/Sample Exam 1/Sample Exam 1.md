@@ -233,6 +233,8 @@ Say, we replaced ≥ with = in (x ≥ 42). On-points for both cases are the same
 ##### Explain what is meant by “software reliability”. Your answer should define software reliability, and explain how the interpretation of failures affect the estimates of failure intensity.
 
 ##### Answer:
+1. Reliability is the probability that a system will operate without failure for a specified time in a specified environment.
+2. Timing failure is one example of the interpretation of failure. Timing failures where the program may deliver correct results but the program fails to meet its timing requirements. According to the estimate of failure intensity, the number of failures in the time interval is the significant data. If the time is greater than the program's timing requirements, the recorded failure numbers may be much more than the actual failure numbers which meet the timing requirements. It will have a bad influence on the estimate of failure intensity.
 
 
 
