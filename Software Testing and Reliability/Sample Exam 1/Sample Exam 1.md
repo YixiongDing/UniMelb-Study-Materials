@@ -237,6 +237,14 @@ Say, we replaced ≥ with = in (x ≥ 42). On-points for both cases are the same
 2. Timing failure is one example of the interpretation of failure. Timing failures where the program may deliver correct results but the program fails to meet its timing requirements. According to the estimate of failure intensity, the number of failures in the time interval is the significant data. If the time is greater than the program's timing requirements, the recorded failure numbers may be much more than the actual failure numbers which meet the timing requirements. It will have a bad influence on the estimate of failure intensity.
 
 
+#### Question 7 [12 marks]
+<img src="Q7.png" alt="550" width="550">
+
+##### Suppose that you are in charge of the Absolutely Safe Aeroplane Flight Control System project and that your testing manager arrives at your office door one morning and shows you the graphs in Figure 3 and Figure 4. The regression equation in Figure 3 is *λ(μ) = −0.00574μ + 0.124153*, with the estimate of the total number of failures 0 = 21.6952.
+
+##### 1. [3 marks] What effect does the first data point in Figure 3 at μ = 3 and  = 0.136364 have on the initial failure intensity 0 and the estimate of the total number of failures 0?
+
+##### Answer:
 
 
 
