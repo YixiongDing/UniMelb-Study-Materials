@@ -25,6 +25,7 @@ Against:
 
 #### (b) [5 marks] Explain what is meant by eventual consistency in a distributed system. You may give an example application to aid your answer. Give your reasons for and against adopting eventual consistency in a distributed system.
 
+#### Answer:
 Eventual consistency in a distributed systems means that, assuming there are no changes to data/state, the state of the system is eventually seen as the same no matter from where data is accessed. For example, a change to some data in a distributed database may take some time to propogate to all nodes. Before it has done so, some reads at some nodes may be inconsistent. But evetually the system will become consistent. It is good for providing large scale systems because it tolerates latency and faults. However some applications may require absolute consistency such as banking applications. Eventual consistency as well needs further definition as to what kinds of inconsistent states that nodes can "see".
 
 #### Q.2. [5 marks] For each of the following architectural designs, provide a definition and give a reason for and a reason against the use of the design. Draw a diagram to illustrate the architecture.
@@ -48,3 +49,8 @@ A Proxy server architecture has a proxy process, which typically sits between a 
 ##### (e) Thin-client
 A thin client architecture runs the entire application on the server and uses the client only for user I/O and control. The client does not install any applications. This makes managing the client easy but it means more network bandwidth and latency requirements which may cause some applications to be ineffective (such as video editing).
  <img src="thin_clients.png" alt="550" width="550">
+
+#### Q.3. [5 marks] In the first project, a minimum connection time interval was used, whereby connections from a given IP address were only allowed to continue if there had been no connection within the last connection time interval. What purpose does this serve? What drawbacks or weaknesses does it have? Is there a better way to achieve the same functionality? If yes, explain, if no give a reason.
+
+#### Answer:
+The connection time interval served the purposes of trying to prevent a single client (more specifically a single IP address) being able to flood the server with spurious requests, e.g. creating huge numbers of files and exhausting memory. It does have the draw back that legitimate requests may be throttled, including requests from other servers that are query relays. The same functionality could be pushed to the network layer, e.g. handled at the router, and this be more effective at preventing the server from becomming overloaded.
