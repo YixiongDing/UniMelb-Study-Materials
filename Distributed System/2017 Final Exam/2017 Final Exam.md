@@ -64,3 +64,14 @@ The client can use a socket timeout that will timeout with an exception if there
 
 #### Answer:
 A remote procedure call (RPC) allows one process to call a procedure in another process, giving it some arguments and obtaining the returned value. RPC is typically access transparent. An RPC like Sun RPC requires the programmer to define the interface of the remote procedures using a interface definition language(idl). Compiling the idl gives rise to definitions that the server must implement and that the client uses to access the remote procedures. The client process creates a connection to the server process and then it can call the remote procedure stub processes using the connection. The arguments are marshalled, transmitted, unmarshalled, executed, the return argument is marshalled, transmitted and unmarshalled and returned to the calling procedure.
+
+#### Q.5. (a) [5 marks] What are the differences between the message queue paradigm and the publish/subscribe paradigm? Give an example application where the message queue paradigm would be the more appropriate choice over publish/subscribe and say why
+
+#### Answer:
+ A message queue paradigm consists of a queue: senders put messages on the queue and receivers take messages from the head of the queue. Once the message has been taken from the queue by a receiver, it is not available to other receivers. On the other hand, publish/subscribe has a log of messages (events), whereby all receivers (subscribers) for a given topic (queue) will receive every event that is published to that topic. Publish/subscribe systems may keep a past log for some time, while message queue systems do not keep messages that have been taken from the queue. The message queue paradigm is most appropriate when communication is specifically one-to-one or one-to-many where each message must be consumed by exactly one receiver, e.g. a job distribution system that distributes jobs to workers. Having said this, some publish/subscribe implementations provide paritioning that also achieves this.
+
+ #### (b) [5 marks]What is meant by the term overlay network in distributed systems? What is a benefit of using an overlay network?
+
+ #### Answer:
+ An overlay network is a network of application processes that run on the network edge, whereby communication takes place between the application processes typically using some kind of routing protocol or lookup protocol. An overlay network can allow the application to optimize its communication at large scale, e.g. in a peer-to-peer fashion, in applications like video streaming where a broadcast tree is useful. Internet-wide video on demand is example application where an overlay network can be effective.
+ 
