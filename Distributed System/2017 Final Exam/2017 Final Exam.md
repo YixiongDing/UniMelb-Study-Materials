@@ -54,3 +54,13 @@ A thin client architecture runs the entire application on the server and uses th
 
 #### Answer:
 The connection time interval served the purposes of trying to prevent a single client (more specifically a single IP address) being able to flood the server with spurious requests, e.g. creating huge numbers of files and exhausting memory. It does have the draw back that legitimate requests may be throttled, including requests from other servers that are query relays. The same functionality could be pushed to the network layer, e.g. handled at the router, and this be more effective at preventing the server from becomming overloaded.
+
+#### Q.4. (a) [5 marks] Suppose that a client creates a TCP Socket to a server, sends a command, and waits for a response. However the server has failed internally and does not respond, though the connection remains open. What can be done by the client to overcome this? Critically explain your answer and include discussion concerning relevant distributed system challenges.
+
+#### Answer:
+The client can use a socket timeout that will timeout with an exception if there is no activity on the socket. This allows the client to decide if it wants to connect again (try again) or not. The challenge is doing this transparently and with performance in mind. Eventually the timeout condition and retries may fail and need to be reported to the user. As well there is the question of how long should be given before timeout: too short and maybe the timeout will be premature while too long and time will be wasted (the user is waiting). 
+
+#### (b) [5 marks] Explain what is meant by a remote procedure call or RPC. Discuss the aspects of implementing an RPC middleware such as Sun RPC. Draw a diagram to show the architectural components of the implementation.
+
+#### Answer:
+A remote procedure call (RPC) allows one process to call a procedure in another process, giving it some arguments and obtaining the returned value. RPC is typically access transparent. An RPC like Sun RPC requires the programmer to define the interface of the remote procedures using a interface definition language. Compiling the idl gives rise to definitions that the server must implement and that the client uses to access the remote procedures. The client process creates a connection to the server process and then it can call the remote procedure stub processes using the connection. The arguments are marshalled, transmitted, unmarshalled, executed, the return argument is marshalled, transmitted and unmarshalled and returned to the calling procedure.
