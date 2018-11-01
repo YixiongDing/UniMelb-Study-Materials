@@ -75,3 +75,20 @@ A remote procedure call (RPC) allows one process to call a procedure in another 
  #### Answer:
  An overlay network is a network of application processes that run on the network edge, whereby communication takes place between the application processes typically using some kind of routing protocol or lookup protocol. An overlay network can allow the application to optimize its communication at large scale, e.g. in a peer-to-peer fashion, in applications like video streaming where a broadcast tree is useful. Internet-wide video on demand is example application where an overlay network can be effective.
  
+ #### Q6(a) [4 marks]What is the purpose of cipher block chaining? Describe a technique that achieves cypher block chaining
+
+ #### Answer:
+ Cipher block chaining is to avoid subsequent, identical unencrypted blocks from having identical encrypted blocks in the transmission, which would otherwise allow an attack to know that the same information is being transmitted in the stream at different points. A technique that achieves cypher block chaining is to XOR a block with a previously encrypted block, prior to encyption. This will ensure that all blocks look different on the stream regardless. The technique can be undone by similar XORing at the receiver.
+
+#### (b) [3 marks] List and briefly explain three worst-case assumptions when designing a secure system.
+
+#### Answer:
+1. All networks are untrusted/unsecure. The network is always to be considered vulnerable to attacks such as undertaking eavsedropping and replaying messages.
+2. The source code is always known by the attacker. The developer cannot rely on the attacker not knowing how the code works.
+3. The attacker has very large resources. The attacker should be assumed to have access to supercomputing power. This means that simple security algorithms must be avoided.
+
+#### (c) [3 marks] Explain what is a digital certificate, including what is the basic technique used to create a digital certificate, and what is a certificate chain.
+
+#### Answer:
+ A digital certificate is a binding between a public key and an the public key's owner identity, signed by a certificate authority that issues the certificate. A digital signature is the basis of a digital certificate. It takes a hash of the combination of public key and identity and then this is encrypted by the certificate authority's private key. The signature can be verified by anyone with the certificate authoritity's public key. To verify the certificate authoritity's public key requires a digital certificate from another authority (certificate chain) or a self-signed certificate (root of the chain).
+ 
