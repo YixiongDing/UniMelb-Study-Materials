@@ -91,4 +91,18 @@ A remote procedure call (RPC) allows one process to call a procedure in another 
 
 #### Answer:
  A digital certificate is a binding between a public key and an the public key's owner identity, signed by a certificate authority that issues the certificate. A digital signature is the basis of a digital certificate. It takes a hash of the combination of public key and identity and then this is encrypted by the certificate authority's private key. The signature can be verified by anyone with the certificate authoritity's public key. To verify the certificate authoritity's public key requires a digital certificate from another authority (certificate chain) or a self-signed certificate (root of the chain).
+
+ #### Q.7. (a) [3 marks] Explain what is meant by process migration. Explain two major complications with process migration.
+
+ #### Answer:
+  Process migration takes a process that is running on one computer, freezes it, copies it (its address space) to another computer and restarts it. It is complicated because the machines must have identical architectures and because the process may have open resources such as open files that must be handled properly for the migration to work.
+
+#### (b) [2 marks] What is the difference between a static location policy and a dynamic location policy? Give an example static policy and an example dynamic policy.
+
+ #### Answer:
+ A static location policy does not take into account information about the resources when making a decision while a dynamic location policy does. An example static policy is random (or even round-robin) while a dynamic policy is least-loaded node.
+
+ #### (c) [2 marks] With respect to decentralized load balancing, what is the difference between a sender-initiated and a receiver-initiated policy? Under what load conditions is the former more efficient?
  
+ #### Answer:
+ Sender-initiated is where the sender generates more work and pushes the work to a receiver. Whereas receiver-initiated is where an idle receiver asks for work from a sender. Sender-initiated is more efficient when the overall load on the system is low.
