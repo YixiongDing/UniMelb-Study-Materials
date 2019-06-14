@@ -57,5 +57,44 @@ _ _ _
 4. Apply the fault-tree analysis method to a system for a given fault
 
 ### What is Safety
-1. Doesn't cause unacceptable harm to the environment or people
+1. Software and hardware used under correct operating conditions don’t cause unacceptable harm to people or environment
     - How we define and quantify unacceptability is a big part of safety engineering
+2. Safety cannot be talked about without considering the entire system
+
+### Safety Engineering Processing
+<img src="safety-engineering-processing.png" alt="550" width="550">
+
+### Hazard
+1. Things that could lead to (future) accidents
+2. Safety engineers examine past accidents etc. looking for **hazards**, Then design the system to be safe in the face of these things, reducing the chance of accidents happening. Doing it properly requires determining **causation**
+
+
+### Causality
+1. Not correlation
+2. Often contested, not always clear cut
+3. Determined by **counterfactual** reasoning
+    - A counterfactual: “if A hadn’t happened, what would be the case …”
+    - “A is a cause of B when, if A hadn’t happened, B wouldn’t have happened.
+
+### Safety Engineering Tasks
+1. Preliminary Hazard Analysis - **HAZOP**
+    1. Based on requirements and early design: “what could go wrong?”
+    2. Hazard brainstorming
+2. Design - **Fault-Tree Analysis / Formal Specification**
+    1. Given those hazards, design the system to eliminate or mitigate them (depending on their risk)
+3. Implementation - **Program Verification**
+    1. Was it done right?
+
+### HAZOP: HAZARDS AND OPERABILITY STUD
+1. A method for Preliminary Hazard Analysis
+2. Exploratory analysis, **systematically** brainstorming what could go wrong
+
+### HAZOP Overview
+1. **Input**: high-level system description as a collection of design items
+2. **Design item**: an intended behaviour, e.g. an event in a process or a state transition
+    - “when sensor X is triggered, valve B is closed immediately”
+3. Each design item is systematically **mutated** to analyse what could happen when the intended behaviour doesn’t occur, and to determine the **risk** (consequences and frequency)
+
+<img src="assessing-hazard-risks.png" alt="550" width="550">
+
+ Risk = Consequence x Frequency
