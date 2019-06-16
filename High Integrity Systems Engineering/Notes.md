@@ -68,7 +68,6 @@ _ _ _
 1. Things that could lead to (future) accidents
 2. Safety engineers examine past accidents etc. looking for **hazards**, Then design the system to be safe in the face of these things, reducing the chance of accidents happening. Doing it properly requires determining **causation**
 
-
 ### Causality
 1. Not correlation
 2. Often contested, not always clear cut
@@ -85,7 +84,7 @@ _ _ _
 3. Implementation - **Program Verification**
     1. Was it done right?
 
-### HAZOP: HAZARDS AND OPERABILITY STUD
+### HAZOP: HAZARDS AND OPERABILITY STUDY
 1. A method for Preliminary Hazard Analysis
 2. Exploratory analysis, **systematically** brainstorming what could go wrong
 
@@ -98,3 +97,26 @@ _ _ _
 <img src="assessing-hazard-risks.png" alt="550" width="550">
 
  Risk = Consequence x Frequency
+
+ ### HAZOP Summary
+ Overall Process
+ 1. Identify design items
+ 2. For each, do each guideword:
+    1. causes
+    2. consequences
+    3. safeguards
+    4. risk
+    5. (design) recommendations
+
+### FAULT TREE ANALYSIS
+1. Does my system’s design properly mitigate the hazards identified during PHA (e.g. HAZOP)?
+2. Analyses when and how hazards can happen, in the context of the system’s design
+3. Is **deductive**, working **backwards** from hazards (or events that lead to them) to how they can be caused
+
+### Analysis Outcomes
+**Uses of fault-tree analysis:**
+1. to work out whether/how to change design to guard against causes
+2. to determine causes that the design doesn’t guard against
+3. documentation for safety case
+4. allow others to check our reasoning
+5. calculate probabilities of hazards arising
