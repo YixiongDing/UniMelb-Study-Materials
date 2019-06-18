@@ -34,10 +34,10 @@ _ _ _
 
 ### Concurrent programming language paradigms
 1. Shared-memory: assignment 1a
-    - Utilising the concept of monitors.
+    - Utilising the concept of monitors
     - These have a long history from Concurrent Pascal to Java and C#
 2. Message-passing: assignment 1b
-    - Based on Hoare’s idea of Communication Sequential Processes (CSP).
+    - Based on Hoare’s idea of Communication Sequential Processes (CSP)
     - Examples include Occam, Erlang and Go
 
 ### Atomicity
@@ -113,3 +113,27 @@ Deadlock is a situation where a set of processes are unable to make any further 
 Concurrent languages provide means for mutual exclusion and for processes to wait for required resources. They also use a principle of no preemption, that is, a process has to give up resources voluntarily
 
 <img src="dead-lock.png" alt="550" width="550">
+
+## Semaphores and State Diagrams
+
+Semaphores provide a concurrent programming construct on a higher level than machine instructions. Using semaphores, the critical section problem can be solved trivially
+
+### Semaphores
+1. A semaphore is a simple but versatile concurrent device for managing access to a shared resource. 
+2. It consists of a **value** *v ∈ N* of currently available access permits, and a **wait set** *W* of processes currently waiting for access. 
+3. It must be initialized *S := (k, { })*, where **k** is the maximum number of threads can simultaneously access some resource. 
+4. *S* comes with two atomic operations, wait and signal
+
+### Semaphore operations
+<img src="semaphore-operations.png" alt="550" width="550">
+
+### Semaphores in Java
+1. The package java.util.concurrent has a Semaphore class
+2. The wait and signal operations are called **acquire()** and **release()**
+3. The Semaphore constructor has, apart from the value argument, an optional Boolean argument which, when true, makes the semaphore strong; that is, it gives access to waiting threads on a “first in, first out” basis
+
+### Summary
+1. Sempahores are an elegant and efficient construct for solving problems in concurrent programming
+2. Semaphorse are widely implemented
+3. Liveness properties of semaphores may depend on implementation
+4. Monitors make concurrency easier still
