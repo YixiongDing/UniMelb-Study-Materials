@@ -6,6 +6,9 @@ June, 2019
 _ _ _
 
 ## 1. Concurrency
+- Lecture Con.01 -- Introduction to Concurrency
+    - March 6, 2019 12:05pm-1:00pm
+    - March 8, 2019 3:20pm-4:15pm
 
 ### Concurrent Program
 1. Sequential program:
@@ -63,6 +66,9 @@ Properties of concurrent systems:
 5. For a concurrent program to be correct, it must be correct for **all** possible interleavings
 
 ## 2. Java threads; mutual exclusion
+- Lecture Con.02 -- Java threads and Mutual Exclusion
+    - March 8, 2019 3:20pm-4:15pm
+    - March 13, 2019 12:05pm-1:00pm
 
 ### Threads in Java
 Java calls a process a “thread” 
@@ -115,6 +121,8 @@ Concurrent languages provide means for mutual exclusion and for processes to wai
 <img src="dead-lock.png" alt="550" width="550">
 
 ## Semaphores and State Diagrams
+- Lecture Con.03 -- Semaphores and State Diagrams
+    - March 13, 2019 12:05pm-1:00pm
 
 Semaphores provide a concurrent programming construct on a higher level than machine instructions. Using semaphores, the critical section problem can be solved trivially
 
@@ -137,3 +145,41 @@ Semaphores provide a concurrent programming construct on a higher level than mac
 2. Semaphorse are widely implemented
 3. Liveness properties of semaphores may depend on implementation
 4. Monitors make concurrency easier still
+
+## Monitors; Java summary
+- Lecture Con.04 -- Monitors in Java
+    - March 15, 2019 3:20pm-4:15pm
+
+Semaphores are easier to use than shared protocol variables, but they are still a low-level and unstructured primitive and don’t scale well
+
+For that reason, concurrent programming languages offer higher-level synchronization primitives. In the case of Java:
+1. **Synchronized methods/objects**: a method or an object can be declared synchronized, which means only one process can execute or modify it at any one time
+2. **Monitors**: a set of synchronized methods and data (an object or module) that queue processes trying to access the data
+
+### Synchronized methods
+
+The synchronized keyword declares a method or object as being
+executable or modifiable by only one process at a time. If a method is declared as synchronized, in effect, it marks this method as a critical section
+
+### Monitors
+Monitors are language features that help with providing **mutual exclusion to shared data**
+
+In Java, a monitor is an **object** that encapsulates some (private) data, with access to the data only via synchronized methods. However, a monitor is more than just a collection of synchronized methods. It manages the blocking and unblocking of processes that vie for access
+
+All objects in Java have monitors. The Object class in Java, from which all other classes inherit, contains the following three methods relevant to monitors:
+
+1. void wait(): Causes the current thread to wait until another thread invokes the notify() method or the notifyAll() method for this object
+2. void notify(): Wakes up a single thread that is waiting on this object’s lock (the choice of thread that is awoken is arbitrary)
+3. void notifyAll(): Wakes up all threads that are waiting on this object’s lock
+
+### Implementing Java monitors
+For a class to meet the requirements of a monitor:
+1. all attributes should be private
+2. all methods that access these attributes should be synchronized
+
+This ensures that all methods will be treated as atomic events
+
+## Processes in FSP
+- Lecture Con.05 -- Processes in FSP
+    - March 20, 2019 12:05pm-1:00pm
+
