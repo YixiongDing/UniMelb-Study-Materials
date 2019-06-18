@@ -58,6 +58,58 @@ Properties of concurrent systems:
 ### Summary
 1. Concurrency is **potential** parallelism
 2. Concurrency is an **abstraction** that makes it easier to reason about the dynamic behaviour of a system 
-3. Formal approaches to understanding concurrent systems are required, because their behaviour is often **non-deterministic**.
-4. In a concurrent program, atomic operations can be interleaved arbitrarily.
-5. For a concurrent program to be correct, it must be correct for **all** possible interleavings.
+3. Formal approaches to understanding concurrent systems are required, because their behaviour is often **non-deterministic**
+4. In a concurrent program, atomic operations can be interleaved arbitrarily
+5. For a concurrent program to be correct, it must be correct for **all** possible interleavings
+
+## 2. Java threads; mutual exclusion
+
+### Threads in Java
+Java calls a process a “thread” 
+- There are two ways to create threads in Java. 
+1. Extend the java.lang.Thread class:
+<img src="java-thread1.png" alt="550" width="550">
+Create an instance of this class:
+<img src="java-thread2.png" alt="550" width="550">
+The first statement creates the thread.
+The call to start() causes the new thread to call its run() method and execute it independently of the caller
+
+As Java does not support multiple inheritance, you may not always be able to extend class Thread.
+
+2. The alternative (and usually recommended!) way to create a thread is to implement the Runnable interface:
+<img src="java-thread3.png" alt="550" width="550">
+Then, create an instance of this using Thread:
+<img src="java-thread4.png" alt="550" width="550">
+
+### Thread states
+A thread that is alive is always in one of three states:
+1. running: it is currently executing;
+2. runnable: it is currently not executing but is ready to execute; or
+3. non-runnable: it is not running and is not ready to run—may be waiting on some input or shared data to become unlocked.
+<img src="thread-states.png" alt="550" width="550">
+
+### Java thread primitives
+1. Calling **start()** causes the Java virtual machine to execute the **run()** method in a dedicated thread, concurrent with the calling code
+2. A thread stops executing when **run()** finishes
+3. A thread can be suspended for a specified amount of time using **sleep(long milliseconds)**
+4. We can test whether a thread is running using the **isAlive( )** method
+5. The method **yield()** causes the current thread to pause, going from “running” status to “runnable”
+6. Calling **t.join()** suspends the caller until thread t has completed (In this sense the two join together.)
+
+### Additional suspension states
+To account for Java’s concurrency primitives fully, we need to
+consider additional states that a thread can be in:
+
+1. Having called sleep();
+2. having called join();
+3. waiting for a lock to be released
+
+A thread can be interrupted through Thread.interrupt().
+If interrupted in one of the three states above, it will return to “runnable” state, and **sleep()**, **join()**, or **wait()** will throw an InterruptedException
+
+### Deadlock
+Deadlock is a situation where a set of processes are unable to make any further progress, because of mutually incompatible demands they make of shared resources
+
+Concurrent languages provide means for mutual exclusion and for processes to wait for required resources. They also use a principle of no preemption, that is, a process has to give up resources voluntarily
+
+<img src="dead-lock.png" alt="550" width="550">
