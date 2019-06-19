@@ -183,3 +183,20 @@ This ensures that all methods will be treated as atomic events
 - Lecture Con.05 -- Processes in FSP
     - March 20, 2019 12:05pm-1:00pm
 
+
+## Synchronisation in FSP
+- Lecture Con.07 -- Synchronisation in FSP
+
+### Deadlock
+A process is in a **deadlock** if it is blocked waiting for a condition that will never become true
+
+### Livelock
+A process is in a **livelock** (a busy wait deadlock) if it is spinning while waiting for a condition that will never become true. Either can happen if concurrent processes or threads are mutually waiting for each other
+
+### The Coffman conditions
+Coffman, Elphick, and Shoshani identify four necessary and sufficient conditions (the **Coffman conditions**) that all must occur for deadlock to happen:
+
+1. **Serially reusable resources**: the processes involved must share some reusable resources between themselves under mutual exclusion
+2. **Incremental acquisition**: processes hold on to resources that have been allocated to them while waiting for additional resources
+3. **No preemption**: once a process has acquired a resource, it can only release it voluntarily — it cannot be forced to release it
+4. **Wait-for cycle**: a cycle exists in which each process holds a resource which its successor in the cycle is waiting for
