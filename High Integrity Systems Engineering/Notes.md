@@ -42,7 +42,7 @@ _ _ _
 ## Chapter 2 — Ada
 ### Learning outcomes
 1. Describe the features of Ada that make it suitable for high-integrity software
-2. Read and modify basic Ada programs
+2. Read and modify basic Ada    
 
 ## Chapter 3 — Safety engineering
 - Lecture 7 High Integrity Systems and Safety Case Studies
@@ -197,3 +197,69 @@ Alloy Specific Quantifiers
 1. one x | P(x): P(x) holds for exactly one value x
 2. lone x | P(x): P(x) holds for at most one value x
 3. none x | P(x): P(x) holds for no value x
+
+## Chapter X — Security and cryptography
+### Learning Outcomes
+1. Informally describe the main security properties of digital signatures, message authentication codes, and cryptographic hash functions.
+2. Understand and analyse the logical trust structure of digital certificates or the properties of public key encryption, and synthesise a model of it in Alloy.
+3. Recall and explain some specific recent examples of security problems caused by the use of weak or poorly implemented cryptography.
+4. Explain at a high level how the Bitcoin protocol works and how certain properties are achieved.
+
+### Encryption
+
+- The sender has to “hide” the message for sending, so nobody else can understand it
+    - This is called **encrypting**
+
+- The receiver has to “un-hide” and recover the message
+    - This is called **decrypting**
+
+- Public key cryptography is one of the greatest ideas in computer science ever
+
+### Public-key cryptography
+
+1. The receiver generates two keys: 
+    1. a public key e (for encrypting), and
+    2. a private key d (for decrypting)
+
+2. She publicises the public key e
+    - People use this for encrypting messages
+
+3. She keeps the private key d secret 
+    - She uses this for decrypting messages
+
+### SSL/TLS - Secret-key cryptography
+
+- The Sender
+    1. generates a secret key,
+    2. encrypts a message with the secret key, 
+    3. encrypts the secret key with the receiver’s public key, and 
+    4. sends the encrypted message and the encrypted key.
+
+- The receiver
+    1. Uses her private key to decrypt the secret key
+    2. Uses the secret key to decrypt the message
+
+### RSA - an algorithm for Encryption
+
+- The receiver thinks of two large prime numbers **p,q**
+    - About 300 digits long
+    - She multiplies them together to get **N = pq**
+    - She generates the public key **e** (almost any **e** will do)
+    - She publicises **(N, e)**.  This is her full public key.
+
+- To encrypt message m, compute **m^e mod N** (This means take the remainder when me is divided by N)
+
+- The receiver can decrypt because she knows p and q
+    - Nobody else can factorise N – the computation takes too long
+
+### Digital Signatures
+1. Signature = Sign(message, private_key) 
+2. Verify(message, signature, public key)
+
+### Example
+Alice has one **public key** and one **private key**, she wants to send a letter to Bob. Firstly, she will **hash** the letter to get a **digest**. Then Alice uses her private key to encrypt the digest and then get her **Signature**. When Bob gets the package of the letter and the signature, he will use Alice's public key decrypts the signature and get the digest first. Then Bob can has the letter, and compare the result with the digest, check if the letter is modified by others.
+
+
+
+
+
