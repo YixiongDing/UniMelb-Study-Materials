@@ -259,7 +259,16 @@ Alloy Specific Quantifiers
 ### Example
 Alice has one **public key** and one **private key**, she wants to send a letter to Bob. Firstly, she will **hash** the letter to get a **digest**. Then Alice uses her private key to encrypt the digest and then get her **Signature**. When Bob gets the package of the letter and the signature, he will use Alice's public key decrypts the signature and get the digest first. Then Bob can has the letter, and compare the result with the digest, check if the letter is modified by others.
 
+### Certificate
+- A (public key) certificate is someone’s signature on someone else’s public key and ID
+    - Sigsigner(user ID, user public key)
+    - Usually with other info, e.g. expiration date, purpose of the cert, etc.
+- The signature is only meaningful if the public key is correct
 
+### Certificate Authorities
+- A Certificate Authority is a trusted authority who issues certificates for others
 
-
-
+### Uses of certificates
+- Signing other certificates
+- Signing software (either source or executable).
+- SSL/TLS (i.e. authenticating web servers)
