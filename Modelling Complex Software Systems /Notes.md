@@ -120,7 +120,7 @@ Concurrent languages provide means for mutual exclusion and for processes to wai
 
 <img src="dead-lock.png" alt="550" width="550">
 
-## Semaphores and State Diagrams
+## 3. Semaphores and State Diagrams
 - Lecture Con.03 -- Semaphores and State Diagrams
     - March 13, 2019 12:05pm-1:00pm
 
@@ -146,7 +146,7 @@ Semaphores provide a concurrent programming construct on a higher level than mac
 3. Liveness properties of semaphores may depend on implementation
 4. Monitors make concurrency easier still
 
-## Monitors; Java summary
+## 4. Monitors; Java summary
 - Lecture Con.04 -- Monitors in Java
     - March 15, 2019 3:20pm-4:15pm
 
@@ -179,12 +179,12 @@ For a class to meet the requirements of a monitor:
 
 This ensures that all methods will be treated as atomic events
 
-## Processes in FSP
+## 5. Processes in FSP
 - Lecture Con.05 -- Processes in FSP
     - March 20, 2019 12:05pm-1:00pm
 
 
-## Synchronisation in FSP
+## 6. Synchronisation in FSP
 - Lecture Con.07 -- Synchronisation in FSP
 
 ### Deadlock
@@ -200,3 +200,66 @@ Coffman, Elphick, and Shoshani identify four necessary and sufficient conditions
 2. **Incremental acquisition**: processes hold on to resources that have been allocated to them while waiting for additional resources
 3. **No preemption**: once a process has acquired a resource, it can only release it voluntarily — it cannot be forced to release it
 4. **Wait-for cycle**: a cycle exists in which each process holds a resource which its successor in the cycle is waiting for
+
+## 7. Introduction to Complex System
+- Lecture Cx.01 -- Introduction to Complex Systems
+    - May 1, 2019 12:05pm-1:00pm
+
+### What are complex system
+1. What is a system?
+    - Oxford Dictionary: A set of things working together as parts of a mechanism or interconnecting network; a complex whole
+
+2. What is a complex system?
+    - Complex systems. . .
+        - are made up of a number of components,
+        - that interact with each other,
+        - typically in a non-linear fashion.
+        - may arise from and evolve through self-organization,
+        - are neither completely regular nor completely random,
+        - permit the development of emergent behaviour at macroscopic scales.
+
+### Properties of complex systems
+1. Emergence
+    - The system has properties that the individual parts do not
+    - These properties cannot be easily inferred or predicted
+    - Different properties can emerge from the same parts, depending upon context or arrangement
+2. Self-organisation
+    - Order increases without external intervention
+    - Typically as a result of interactions between parts
+3. Decentralisation
+    - There is not a single controller or ‘leader’
+    - distribution: each part carries a subset of global information
+    - bounded knowledge: no part has a full view of the whole
+    - parallelism: parts can act simultaneously
+4. Feedback
+    - Positive feedback amplifies fluctuations in system state
+    - Negative feedback dampens fluctuations in system state
+
+### What is a model?
+- Oxford Dictionary: A simplified description, especially a mathematical one of a system or process, to assist calculations and predictions.
+
+### Why build models?
+- Models allow us to examine system behaviour in ways that are not feasible in the real world:
+    1. too expensive
+    2. too time-consuming
+    3. not ethical
+    4. simply not possible
+- Models help us to understand a system by building it
+
+### Types of models
+1. Mathematical models：
+    - For some systems, we can describe the global state and behaviour in terms of **macro-equations**
+    - For some systems, these macro-equations exist and have an analytical solution (found using calculus)
+2. 
+
+### Steps in modelling a complex system
+1. define the key questions
+2. identify the structure (parts and interactions) of the system
+3. define the possible states for each part
+4. define how the state of each part changes over time through interactions with other parts
+5. verify, validate and evaluate the model in terms of simplicity, correctness and robustness
+6. define and run experiments with the model to address key questions
+
+## 8. Dynamical Systems and Chaos
+- Lecture Cx.02 -- Dynamical Systems and Chaos
+    - May 3, 2019 3:20pm-4:15pm
