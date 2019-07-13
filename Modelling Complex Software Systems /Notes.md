@@ -248,9 +248,16 @@ Coffman, Elphick, and Shoshani identify four necessary and sufficient conditions
 
 ### Types of models
 1. Mathematical models：
-    - For some systems, we can describe the global state and behaviour in terms of **macro-equations**
-    - For some systems, these macro-equations exist and have an analytical solution (found using calculus)
-2. 
+    - macro-equations
+        - For some systems, we can describe the global state and behaviour in terms of **macro-equations**
+        - For some systems, these macro-equations exist and have an analytical solution (found using calculus), Unfortunately, many systems have no such analytic solution
+    - no macro-equations：
+    
+3. Computational models:
+    - In particular **agent-based models** (ABMs), which arose (in the 1960s) to model systems that were too complex for analytical descriptions. The rapid growth of computational power has made ABMs a practical tool
+        - system parts: **agents** with local state and rules
+        - system structure: **patterns** of local interaction between agents
+        - system behaviour: dynamic **rules** for updating agent state on the basis of interactions
 
 ### Steps in modelling a complex system
 1. define the key questions
@@ -263,3 +270,66 @@ Coffman, Elphick, and Shoshani identify four necessary and sufficient conditions
 ## 8. Dynamical Systems and Chaos
 - Lecture Cx.02 -- Dynamical Systems and Chaos
     - May 3, 2019 3:20pm-4:15pm
+
+### What is a dynamical system?
+- a set of possible states (the state space)
+- time t (which we may treat as discrete or continuous)
+- a rule that determines the state at the present time (xt ) in terms of states at earlier times (xt−1, xt−2, . . .)
+- For now, we will require this rule to be deterministic, so that the history of the system (it’s past state) uniquely determines the present state.
+- initial condition x0 : the state that the system is in when t = 0
+
+### Functions and iteration
+- **Function**: takes a number as an input, does something to it, and produces a number as an output; eg,
+    - f (x) = 3x
+- **Iteration** is simply using the output of the previous application of a function as the input for the next application:
+    - x<sub>0</sub>, f (x<sub>0</sub>), f (f (x<sub>0</sub>)), f (f (f (x<sub>0</sub>))), . . .
+    - x<sub>0</sub>, x<sub>1</sub>, x<sub>2</sub>, x<sub>3</sub>, . . . , x<sub>t</sub>
+
+### Red foxes in Australia
+
+#### Assumptions:
+1. the initial population contained 2 female red foxes
+2. a female red fox reproduces in its first year of life
+3. a female red fox only reproduces once in it’s life
+4. half of newborn kits are female
+
+#### Formula
+- The number of female red foxes will double each year
+    - x<sub>t+1</sub> = 2x<sub>t</sub>
+    - where xt is the number of female red foxes alive in year t
+- The general formula for x<sub>t</sub>:
+    - x<sub>t</sub> = x<sub>0</sub>2<sup>t</sup>
+- The **exponential model** is often stated as x<sub>t</sub> = x<sub>0</sub>r<sup>t</sup> , where r is a **parameter** that governs how steeply the curve rises
+
+#### Refining our model
+5. when there are few red foxes, there will be plenty of food, and their numbers will grow rapidly
+6. when there are many red foxes, there won’t be enough food to go around, and their numbers will grow more slowly
+
+#### The logistic map
+The logistic map (based on a the continuous equation introduced in 1838 by Pierre François Verhulst) displays a diverse range of behaviours, depending on the value of the parameter r
+- The logistic map of model
+    - x<sub>t+1</sub> = rx<sub>t</sub>(1-x<sub>t</sub>)
+    - rx<sub>t</sub> corresponds to positive feedback
+    - x<sub>t+1</sub> corresponds to negative feedback
+
+### Chaotic System
+
+#### Definitions
+1. The dynamical update rule is deterministic
+2. The system behaviour is aperiodic
+3. The system behaviour is bounded
+4. The system displays sensitivity to initial conditions
+
+### Summary
+1. To model a dynamical system, we define:
+    - our system variables and the states they can take
+    - the function that computes the next state
+2. This will usually involve simplifying assumptions about the real world
+    - important to record these
+3. When exploring the behaviour of our model, we need to evaluate it against what we know about the real system
+    - This may result in us refining our model
+4. Dynamical systems have several different types of characteristic behaviours
+    - fixed points
+    - limit cycles
+    - aperiodic orbits
+5. The dynamic behaviour that a system exhibits can depend critically on the values of system parameters
