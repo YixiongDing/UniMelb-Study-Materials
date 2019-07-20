@@ -333,3 +333,176 @@ The logistic map (based on a the continuous equation introduced in 1838 by Pierr
     - limit cycles
     - aperiodic orbits
 5. The dynamic behaviour that a system exhibits can depend critically on the values of system parameters
+
+## 9. ODE Models I: Predator-Prey
+
+### Model formulation
+- Prey (rabbits): 
+    - <sup>dR</sup> &frasl; <sub>dt</sub> = αR − βRF
+- Predators (red foxes): 
+    - <sup>dF</sup> &frasl; <sub>dt</sub> = δRF − γF
+- Parameters:
+    - α: growth rate of the rabbit population
+    - β: rate at which foxes predate upon (eat) rabbits
+    - γ: growth rate of the fox population
+    - δ: decay rate of the fox population due to death and migration
+
+## 10. ODE Models II: Epidemics
+
+### The basic SIR model
+The Susceptible, Infectious, Recovered (SIR) model is one of the simplest disease models, proposed almost 100 years ago and still the basis of ID modelling today.
+
+The SIR model sorts people into three categories based on their disease state:
+- Susceptible – can be infected
+- Infectious – can infect others
+- Recovered – cannot be infected nor infect others
+
+If we think about a single person in our population, there are two possible events that can occur to them:
+1. If they are susceptible, and they encounter an infectious person, they may be infected
+2. If they are infectious, they may recover
+
+## Cellular Automata I: 1D and 2D CAs
+Cellular Automata (CA) are a type of discrete dynamical system
+that exhibit complex behaviour based on simple, local rules.
+- **automaton**: a theoretical machine that updates its internal state based on external inputs and its own previous state
+- **cellular automaton**: an array of automata (cells), where the inputs to one cell are the current states of nearby cells
+
+### Cellular Automata
+In a CA:
+- time is discrete (like the logistic map)
+- space is discrete: typically a 1D or 2D grid (3D also possible)
+- system state is discrete: each component of a system is in one of a finite set of states (eg, ON or OFF); therefore the entire system has a finite, countable number of states
+- update rules are defined in terms of local interactions between components
+
+## Agent-Based Models
+Like cellular automata (CA), agent-based models (ABMs) are an approach to modelling complex systems that focuses on the components of the system and the interactions between them.
+
+An ABM typically has three elements:
+1. agents
+2. environment (including other agents)
+3. interactions
+
+ABMs differ from CA in that allow more flexibility in how they
+represent agent behaviour and interaction structure.
+
+### The agent (boid)
+
+Agent behaviours include:
+
+- forward motion
+- turning left or right
+- (perhaps) acceleration and deceleration 
+
+#### Characteristics of agents
+1. self-contained
+    - An agent is a modular component of a system, is has a boundary and can be clearly distinguished from and recognised by other agents.
+    - Example: Flocking model: the boids are clearly distinguishable and ‘recognised’ (though not uniquely) by other boids.
+2. autonomous
+    - An agent can function independently in its environment, and in its interactions with other agents (within the scope of the defined model).
+    - Example: Flocking model: the behaviour of each boid is entirely defined by the information it obtains about its local environment
+3. dynamic state
+    - An agent has attributes, or variables, that can change over time. An agents current state is what determines its future actions and behaviour.
+    - Example: Flocking model: a boid’s state consists of its current heading and speed. This state determines the motion of the boid, and is modified on the basis of information it recieves about its local environment
+4. social
+    - An agent has dynamic interactions with other agents that influence their behaviour.
+    - Example: Flocking model: boids ‘interact’ by perceiving and reacting to the location and behaviour of other boid
+5. adaptive
+    - An agent may have the ability to learn and adapt its behaviour on the basis of its past experiences.
+    - Example: imagine if prey boids in predator-prey model observed that predators more often attacked boids on their right than their left (becuase of the location of their sensors/eyes), they might be able to ‘learn’ to move to the left of a predator and hence escape
+6. goal-directed
+    - An agent may have goals that it is attempting to achieve via its behaviours.
+    - Example: imagine that, in addition to avoiding predators, prey boids also have the goal of collecting materials to build a nest. . . This would be another factor influencing their behaviour.
+7. heterogeneous
+    - A system may be comprised of agents of different types: these differences may be by design (eg, predators and prey), or a result of an agents’ past history (eg, the ‘energy level’ of predators, based upon whether it has eaten recently)
+
+### Environment
+
+Environments may be static (unchanging over time), or they
+may change as a result of agent behaviour, or they may be
+independently dynamic
+
+Real environments are typically dynamic (and often stochastic). Therefore we may not be able to foresee all possible ‘states’of the environment and how agents will respond to them.
+
+### Interactions
+
+A defining characteristic of complex systems is local
+interactions between agents, as defined by the agent
+neighbourhood.
+
+Depending on the structure of the system, the composition of
+an agent’s neighbourhood may be dynamic (ie, change over
+time as it moves through its environment)
+
+### Summary
+1. Agent-based models consist of agents, an environment, and interactions between agents and (a) other agents and (b) the environment.
+2. ABMs feature decentralised information and decision making, and can reproduce the emergent behaviour and self-organisation found in complex systems.
+3. ABMs are employed in a wide variety of domains: ecology, social science, economics, political science, etc.
+4. ABMs can be much more elaborate than CAs.
+
+### Networks
+
+#### Why study networks?
+1. More and more data on patterns of interaction is becoming available.
+2. Network science offers tools to help make sense of this data.
+3. We can learn something about the functional properties ofthese systems by studying their structural properties.
+4. Insights developed in one domain may generalise to other domains.
+
+#### What is a network?
+
+A network consists of:
+1. A set of nodes or vertices
+2. A set of edges or links
+3. Data about nodes and edges
+
+Formally, a graph G = (N, E) is an ordered pair of finite sets. Elements of N are called nodes or vertices. Elements of E ⊂ N × N are called edges or links.
+
+#### Network properties
+
+1. The structural properties of networks often have functional consequences. Structural properties are often used to compare and contrast network models of different systems.
+2. Networks may be unipartite (all nodes of the same type) or bipartite (nodes of two different types), or k-partite (nodes of k different types).
+    - **bipartite networks**: directors and the companies whose boards they site on; actors and the movies they have appeared in
+    - **directed networks**: web pages and the (directed) links between them; food webs with directed edges indicating predation
+3. Edges may be directed or undirected.
+
+##### Assumptions
+1. We will consider properties of networks that are unipartite, with undirected edges
+2. No parallel edges (ie, there can only be one edge between two nodes)
+3. No self-connections (ie, there are no edges between a vertex and itself)
+
+##### Density
+- The density D of a network is the ratio of the number of edges in the network to the number of possible edges.
+
+- A network with N nodes and E edges could have up to <sup>N(N−1)</sup> &frasl; <sub>2</sub> possible edges, therefore: D = <sup>2E</sup> &frasl; <sub>N(N−1)</sub>
+
+##### Degree
+- The degree k<sub>i</sub> of node i is the number of edges between node i and other nodes in the network. Nodes with high degree are often considered to be more “important”.
+
+- The average degree < k > of a network, where < k >= 2E/N.
+
+- The degree distribution P(k) of a network is the probability distribution of degrees over all nodes in the network; P(k) = N<sub>k</sub>/N where N<sub>k</sub> is the number of nodes of degree k.
+
+##### Distance
+- The distance d<sub>ij</sub> between nodes i and j is the length of the shortest path between those two nodes.
+
+- The characteristic path length L is the average distance (ie, shortest path) between all pairs of nodes in the network
+
+- The diameter of a network is the longest shortest path between any two nodes; ie, it is the largest number of nodes that must be traversed to move from one node to another without backtracking
+
+##### Clustering
+- The clustering coefficient C is a measure of “cliquishness” in a network; ie, the extent to which, if Alice is friends with Bob and Carol, Bob and Carol are likely to be friends with each other.
+
+- Another way of thinking about the clustering coefficient of a node i is in terms of the proportion of possible triangles containing i that exist.
+
+##### Centrality
+Centrality is another approach to measuring which are the most
+important nodes or edges in a network. There are many different definitions including:
+1. the number of shortest paths that pass through a particular node or edge
+2. the extent to which a node is connected to other “important” nodes
+
+##### Assortativity 
+Assortativity measures the extent to which similar nodes tend to be connected to each other. With respect to degree, a highly assortative network is one in which the high degree nodes are all connected to each other, while a dissasortative network is one in which high degree nodes tend to be connected to low degree nodes.
+
+##### Summary
+- A broad variety of systems can be described in terms of their network structure.
+- Doing so allows us to quantify and analyse system structure in terms of relatively simple properties.
+- These properties can have functional consequences, that may generalise across different systems.
