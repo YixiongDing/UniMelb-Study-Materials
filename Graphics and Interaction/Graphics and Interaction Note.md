@@ -254,6 +254,13 @@ There needs to be smooth transitions between them
 - - -
 ## Lecture 5: Fractal Geometry and Landscapes
 - - -
+- Fractals have a pattern that repeats at different scales
+    - Self-similarity (exact, quasi, statistical)
+- Manifestations of fractals
+    - Nature, geometry, computer graphics, cinema, etc.
+- 3D landscapes
+    - Brownian motion
+    - Diamond-square algorithm
 
 ### Fractal
 
@@ -292,3 +299,121 @@ Fractional Brownian surfaces for different values of the **Hurst parameter**. Th
 <img src="diamond-square2.png" alt="550" width="550">
 
 - - -
+## Lecture 6: Collision Detection
+- - - 
+
+As the name implies, collision detection is all about the detection of an intersection between different objects in a virtual environment
+
+Why is this important?
+- Prevent objects from just going through each other as if there are not even there
+- Produce realistic virtual environments by having objects react accordingly when a collision happens
+
+### 2D Applications
+Collision detection is relatively simple in 2D applications
+<img src="2d-collision.png" alt="550" width="550">
+
+### 3D Applications
+
+Extra coordinate and polygons make the process of detecting
+collision far more complex
+
+### Approaches
+
+There are two main approaches for collision detection:
+- Continuous (a priori)
+- Discrete (a posteriori)
+
+#### Continuous (a priori)
+
+We predict if a collision is going to occur based on the trajectories of the objects
+
+<img src="continous.png" alt="300" width="300">
+
+While robust, this method is has some important drawbacks:
+- For example, if you have 1 object with 100 triangles, and another one with 200 triangles, then there are 100*200 = 20000 different potential intersections to calculate
+- This is particularly true when you have a dynamic virtual environment with a high number of objects constantly moving.
+- Computationally complex, can effect performance (framerate drops)
+
+#### Discrete (a posteriori)
+
+It allows objects to actually penetrate each other
+
+The physics engine pushes it back to where the collision happened initially. You do not see the middle part of diagram
+
+<img src="discrete.png" alt="550" width="550">
+
+Much more efficient that a continuous (a priori) approach, but not without its problems
+
+- **Tunnelling** will occur when a very fast object passes through another object, and the engine does not detect the collision
+
+### Bounding volumes
+
+Bounding volumes can be used to further simplify collision detection
+
+These volumes enclose the whole object, and should be as small as possible
+
+Bounding boxes and spheres are the mostly commonly used, but other shapes can also be used (e.g., elipsoids)
+
+#### Axis Aligned Bounding Box (AABB)
+
+The bounding box remains orientated with respect to the main axes
+
+<img src="aabb.png" alt="550" width="550">
+
+Pros:
+- Translation invariant
+    - Does not change if you moves every point of the object by the same amount in a given direction
+- Very simple to compute
+
+Cons:
+- With other movements, box no longer remains axis-aligned
+- N eeds to be recomputed on everyframe
+
+#### Oriented Bounding Box (OBB)
+
+Box is oriented with respect to the tank
+
+<img src="obb.png" alt="550" width="550">
+
+Pros:
+- Transformation invariant
+    - Translation
+    - Reflection
+    - Rotation
+
+- The volume is more compact than AABB, therefore the is less empty space
+
+Cons:
+- The computation of intersections is, however, much more complex as box orientation is dynamic
+
+#### Bounding Spheres
+
+<img src="bounding-spheres.png" alt="550" width="550">
+
+Pros:
+- Transformation invariant
+- Simple collision detection
+
+Cons:
+- More empty space in the volume
+
+<img src="bounding-example.png" alt="550" width="550">
+
+#### Hierarchical bounding volumes
+
+<img src="hierachical.png" alt="550" width="550">
+
+Two-phase approach to improve efficiency
+
+- **Broad phase (simple, low cost)**: This is a first pass on the bounding volumes intended to identify potential collisions, while also marking objects that are definitely not colliding
+
+- **Narrow phase (complex, high cost)**: Based on the identified potential collisions from the broad phase, exact collision tests are conducted to determine if the object will collide or not
+
+#### Hitboxes
+
+Typically used in video games for real-time collision detection
+
+Hitboxes are simplified bounding volumes as they are used to detect one-way collisions, such as bullets hitting a character’s head
+
+<img src="hitbox.png" alt="550" width="550">
+
