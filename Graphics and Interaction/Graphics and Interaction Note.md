@@ -75,6 +75,7 @@ _ _ _
 
 #### Stream Output Stage
 
+- Pointing back to the buffer because we want to do more operations
 - Allows us to receive data (vertices or primitives) from the geometry shader and feed back into pipeline for processing by another set of shaders
 - This can be used to have the GPU do processing that would otherwise have been done on the CPU
 - Useful e.g. for particle systems update (waves, ripples)
@@ -82,4 +83,42 @@ _ _ _
 #### Rasterizer Stage
 
 - Converts vector information (composed of shapes or primitives) into a raster image (composed of pixels) for the purpose of displaying real-time 3D graphics
+<img src="culling.png" alt="550" width="550">
 - Performs culling
+
+##### Culling
+
+- In order to avoid rendering vertices that will not be displayed in the final image, DirectX performs ¡®culling¡¯
+- Triangles facing away from the camera will be culled and not rendered
+- Triangles with vertices in a counterclockwise order are not rendered 
+- The order of vertices is therefore important
+- DirectX performs ¡®Counter-Clockwise culling¡¯ 
+- Triangles with vertices in a counterclockwise order are not rendered 
+- The order of vertices is therefore important
+- You can create an algorithm that as you rotate the object it changes dynamically the order you are creating the triangles to either make them render or not render
+<img src="culling2.png" alt="550" width="550">
+
+#### Pixel (Fragment) Shader
+
+- Produces colour values for each interpolated pixel fragment
+- Per-pixel lighting can be performed
+- Can also produce depth values for depth-buffering
+
+#### Output-Merger Stage
+
+- Combines pixel shader output values to produce final image
+- May also perform depth buffering
+- Double buffering
+
+##### Double Buffering
+
+- Don¡¯t want to draw objects directly to the screen!- The screen could update before a new frame has been completely drawn
+- Instead draw next frame to a buffer and swap buffers when complete
+- In game, image lagging happens because the buffer is full 
+<img src="double-buffering.png" alt="550" width="550">
+
+##### Framerate
+ 
+- Data sent through the pipeline X amount of times per second
+- If X is 30, then the framerate is 30fps
+
