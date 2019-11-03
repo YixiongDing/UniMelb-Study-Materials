@@ -36,7 +36,12 @@ _ _ _
 
 - Game engines, and other graphics programs, generally use either Direct3D (Windows) or OpenGL (most other platforms)
 - Modern PC graphics cards will support some version of both APIs
-- Game engines (like Unity) build upon these APIs to make development easier### Representing Objects- For efficiency, the graphics card will render objects as triangles- Any polyhedron can be represented by triangles
+- Game engines (like Unity) build upon these APIs to make development easier
+
+### Representing Objects
+
+- For efficiency, the graphics card will render objects as triangles
+- Any polyhedron can be represented by triangles
 - Other 3D shapes can be approximated by triangles
 
 ### Pipelining
@@ -88,11 +93,11 @@ _ _ _
 
 ##### Culling
 
-- In order to avoid rendering vertices that will not be displayed in the final image, DirectX performs ¡®culling¡¯
+- In order to avoid rendering vertices that will not be displayed in the final image, DirectX performs ''culling''
 - Triangles facing away from the camera will be culled and not rendered
 - Triangles with vertices in a counterclockwise order are not rendered 
 - The order of vertices is therefore important
-- DirectX performs ¡®Counter-Clockwise culling¡¯ 
+- DirectX performs ''Counter-Clockwise culling'' 
 - Triangles with vertices in a counterclockwise order are not rendered 
 - The order of vertices is therefore important
 - You can create an algorithm that as you rotate the object it changes dynamically the order you are creating the triangles to either make them render or not render
@@ -112,7 +117,8 @@ _ _ _
 
 ##### Double Buffering
 
-- Don¡¯t want to draw objects directly to the screen!- The screen could update before a new frame has been completely drawn
+- Don't want to draw objects directly to the screen!
+- The screen could update before a new frame has been completely drawn
 - Instead draw next frame to a buffer and swap buffers when complete
 - In game, image lagging happens because the buffer is full 
 <img src="double-buffering.png" alt="550" width="550">
@@ -125,6 +131,14 @@ _ _ _
 - - -
 ## Lecture 4: Camera Control
 - - -
+1. Camera parameters
+    - Roll, pitch, yaw, zoom, focal length.
+2. Camera control dependency
+    - approaches: user and automatic
+    - application domain: 3D models, visualisation, games, etc.
+    - nature of the user: goals, expertise, etc
+3. Navigation metaphors
+    - Eyeball in hand, world in hand, flying vehicle, walking
 
 - Camera control is a requirement in nearly all interactive 3D applications
 - Including but not limited to: visualisations, games, visual analytics, cinematography, etc
@@ -160,7 +174,8 @@ Camera control dependent on:
 
 Interactive approaches propose a set of mappings between the dimensions of the user input device (e.g. mouse, keyboard) and the camera parameters
 
-#### Automatic camera control
+#### Automatic camera control
+
 The application itself takes care of camera control, either based on user preferences (some degree of control) or predefined heuristics set during implementation
 
 ### Application Domain
@@ -191,11 +206,12 @@ Camera control will depend on the application domain, such as:
 - Users control the camera (giving them a sense of being the character in virtual environment). Many games use first person camera views, and the most common genre is the First Person Shooter (FPS), for example, Counter-Strike or Overwatch
 - Camera control is unproblematic, since it is directly mapped to the location and orientation of the character
 
-#### Third person 
-- The camera system tracks characters from a distance, generally the view is slightly above and behind the main character) and responds to both local elements of the environment (to avoid occlusion) and the character¡¯s interactions (maintaining points of interest in shot)
+#### Third person 
+
+- The camera system tracks characters from a distance, generally the view is slightly above and behind the main character) and responds to both local elements of the environment (to avoid occlusion) and the character's interactions (maintaining points of interest in shot)
 
 #### Action replay 
-- Replays are widely used in modern racing or multi©\character games where there are significant events that a player might like to review 
+- Replays are widely used in modern racing or multi\character games where there are significant events that a player might like to review 
 - It is imperative that these replays are meaningful to the players, such that the elements of the scene and their spatial configuration are readily identifiable
 - nteractive storytelling presents a number of interesting opportunities for camera control
 
@@ -208,7 +224,9 @@ Camera control will depend on the application domain, such as:
 - Certain views from far above or below cannot be achieved or are blocked by other objects
 <img src="eyeball-in-hand.png" alt="550" width="550">
 
-#### World in hand- Connects user¡¯s navigation directly to the object or environment to be moved
+#### World in hand
+
+- Connects user's navigation directly to the object or environment to be moved
 - The user can imagine that the object is in his/her hand as the mouse is moved
 - Useful in a single object case (e.g., cube), but not very good in navigating a virtual environment
 <img src="world-in-hand.png" alt="550" width="550">
@@ -232,3 +250,45 @@ Applications tend to use multiple metaphors in sequence:
 - **walking** to give a visitor the sense of presence in an architectural space).
 
 There needs to be smooth transitions between them
+
+- - -
+## Lecture 5: Fractal Geometry and Landscapes
+- - -
+
+### Fractal
+
+- Originally coined by mathematician Benoit Mandelbrot, and is derived from the Latin word fractus (broken)
+- A fractal is a geometric shape is generated using a series of recursive rules
+- This means they have a pattern that repeats at different scales, property known as ***self-similarity***
+
+#### Self-Similarity
+
+There are three types of self-similarity found in fractals:
+- **Exact self-similarity (strongest)**: The fractal appears identical at different scales. Fractals defined by iterated function systems often display exact self-similarity
+- **Quasi-self-similarity**: The fractal appears approximately (but not exactly) identical at different scales. Quasi-self-similar fractals contain small copies of the entire fractal in distorted and degenerate forms
+- **Statistical self-similarity (weakest)**: The fractal has numerical or statistical measures which are preserved across scales. Random fractals (e.g., fractal landscapes) are examples of fractals which are statistically self-similar, but neither exactly nor quasi-self-similar
+
+#### In Computer Graphics
+
+- Complex pictures generated by formula and using several iterations. This means one formula is repeated with slightly different values over and over again, taking into account the results from the previous iteration
+- Possible to create realistic textured landscapes, such as mountain ranges, coastlines or even destruction patterns
+- The typical basic primitives of computer graphics, such as lines, circles, polygons are not suitable for fractals
+- This is because you would need millions of these for an acceptable resolution
+- Special tailoring of algorithms for rendering fractals is required
+
+### Brownian Motion
+
+Fractional Brownian surfaces for different values of the **Hurst parameter**. The larger the parameter, the smoother the surface
+<img src="huster-parameter.png" alt="550" width="550">
+
+### Diamond Square Algorithm
+
+1. Start by setting the initial values for the corner points of the grid
+2. Perform a diamond step and a square step alternately until completion
+    - **Diamond step**: For each square in the array, set the midpoint of that square to be the average of the intersecting points plus a random value
+    - **Square step**: For each diamond in the array, set the midpoint of that diamond to be the average of the intersecting points plus a random value
+
+<img src="diamond-square1.png" alt="550" width="550">
+<img src="diamond-square2.png" alt="550" width="550">
+
+- - -
