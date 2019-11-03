@@ -122,3 +122,113 @@ _ _ _
 - Data sent through the pipeline X amount of times per second
 - If X is 30, then the framerate is 30fps
 
+- - -
+## Lecture 4: Camera Control
+- - -
+
+- Camera control is a requirement in nearly all interactive 3D applications
+- Including but not limited to: visualisations, games, visual analytics, cinematography, etc
+- It is crucial to have effective camera control via positioning and movement
+
+### Camera parameters
+
+- **Roll** - Rotation around the front-to-back axis
+- **Pitch** - Rotation around the side-to-side axis
+- **Yaw** - Rotation around the vertical axis
+<img src="roll-pitch-yaw.png" alt="550" width="550">
+
+- **Focal length**: Approximates behavior of real camera lens. Objects at distance of focal length are in focus; other objects get blurred. Also affects field of view.
+- **Zoom**: 
+  - When referring to an image or graphic, zoom describes the function of focusing on a section of an image and increasing its overall size to manipulate or view in greater detail
+  - As you zoom into an image each of the pixels that make up the image grow and make the image appear pixelated or jaggy
+  - Unfortunately, unlike the movies you cannot "enhance" the image to make a zoomed image clearer
+
+### Camera control dependency
+
+Camera control dependent on:
+- Balance of camera control approaches
+- Application domain
+- Nature of the user (goals, expertise, etc.)
+
+### Camera control approaches
+
+- The user exercises interactive control
+- The user exercises some degree of interactive control
+- The application itself assumes full control of the camera itself
+
+#### User camera control
+
+Interactive approaches propose a set of mappings between the dimensions of the user input device (e.g. mouse, keyboard) and the camera parameters
+
+#### Automatic camera control
+The application itself takes care of camera control, either based on user preferences (some degree of control) or predefined heuristics set during implementation
+
+### Application Domain
+
+Camera control will depend on the application domain, such as:
+- 3D Modellers
+- Visualisation
+- Games
+- Multimodal systems
+
+### Visualisation
+
+- Visualization is an application for which the user requires interactive control to explore and pursue hypotheses concerning the data
+- Restricted to a small number of navigational idioms, for example, the identification of a number of interesting points or regions in the data, and the exploration of the remaining data in relation to these
+- Automatic camera control and assisted direct camera control, has the potential to greatly enhance interaction with large data sets
+
+### Games
+
+- Interactive computer games impose the necessity for real-time camera control. The enforcement of frame coherency (smooth changes in camera location and orientation) is necessary to avoid disorienting players
+- Games are inherently different from film in that the camera is usually either directly or indirectly controlled by players (typically through their control of characters to which a camera is associated)
+- Narrative aspects of real-time games can be supported by the appropriate choice of shot edits both during and between periods of actual game play
+- A potential camera control problem involves following one or more characters whilst simultaneously avoiding occlusions in a highly cluttered environment
+
+### Games: Types of viewpoints
+
+#### First person 
+
+- Users control the camera (giving them a sense of being the character in virtual environment). Many games use first person camera views, and the most common genre is the First Person Shooter (FPS), for example, Counter-Strike or Overwatch
+- Camera control is unproblematic, since it is directly mapped to the location and orientation of the character
+
+#### Third person 
+- The camera system tracks characters from a distance, generally the view is slightly above and behind the main character) and responds to both local elements of the environment (to avoid occlusion) and the character¡¯s interactions (maintaining points of interest in shot)
+
+#### Action replay 
+- Replays are widely used in modern racing or multi©\character games where there are significant events that a player might like to review 
+- It is imperative that these replays are meaningful to the players, such that the elements of the scene and their spatial configuration are readily identifiable
+- nteractive storytelling presents a number of interesting opportunities for camera control
+
+### Navigation metaphors
+
+#### Eyeball in hand
+
+- The user can manipulate the viewpoint as if it was held in his or her hand, as the mouse is moved
+- In essence, the user imagines moving him/herself around the object
+- Certain views from far above or below cannot be achieved or are blocked by other objects
+<img src="eyeball-in-hand.png" alt="550" width="550">
+
+#### World in hand- Connects user¡¯s navigation directly to the object or environment to be moved
+- The user can imagine that the object is in his/her hand as the mouse is moved
+- Useful in a single object case (e.g., cube), but not very good in navigating a virtual environment
+<img src="world-in-hand.png" alt="550" width="550">
+
+#### Flying vehicle
+
+- The camera be treated as a control stick for an airplane
+- Makes it easy for a user to get around in 3D space in a relatively unconstrained way
+
+#### Walking
+
+- Allow inhabitants of a virtual environment to navigate by simply allowing them to walk
+- The camera moves in the environment while maintaining a constant distance (height) from a ground plane
+
+### Combining navigation metaphors
+
+Applications tend to use multiple metaphors in sequence:
+
+- **flying vehicle** for navigation of a large landscape,
+- **world in hand** for proximal inspection, and
+- **walking** to give a visitor the sense of presence in an architectural space).
+
+There needs to be smooth transitions between them
