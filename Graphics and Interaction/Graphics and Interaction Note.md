@@ -302,6 +302,17 @@ Fractional Brownian surfaces for different values of the **Hurst parameter**. Th
 ## Lecture 6: Collision Detection
 - - - 
 
+- Collision detection and its importance
+    - Two main approaches for collision detection
+    - Continuous (a priori) and discrete (a posteriori)
+- Bounding Volumes
+    - Axis Aligned Bounding Box (AABB)
+    - Oriented Bounding Box(OBB)
+    - Bounding Spheres
+- Hierarchical bounding volumes
+    - Broad phase and narrow phase.
+- Hitboxes
+
 As the name implies, collision detection is all about the detection of an intersection between different objects in a virtual environment
 
 Why is this important?
@@ -399,7 +410,7 @@ Cons:
 
 <img src="bounding-example.png" alt="550" width="550">
 
-#### Hierarchical bounding volumes
+### Hierarchical bounding volumes
 
 <img src="hierachical.png" alt="550" width="550">
 
@@ -409,7 +420,7 @@ Two-phase approach to improve efficiency
 
 - **Narrow phase (complex, high cost)**: Based on the identified potential collisions from the broad phase, exact collision tests are conducted to determine if the object will collide or not
 
-#### Hitboxes
+### Hitboxes
 
 Typically used in video games for real-time collision detection
 
@@ -417,3 +428,125 @@ Hitboxes are simplified bounding volumes as they are used to detect one-way coll
 
 <img src="hitbox.png" alt="550" width="550">
 
+- - -
+## Lecture 7: Surface Rendering and Shading
+- - - 
+
+### Shading Vs Illumination Model
+
+There is a difference between the shading model and the illumination model used in rendering scenes
+
+- The illumination model is about determining how light sources interacts with object surfaces (i.e. intensity of the light that is reflected at a given point on a surface)
+
+- The shading model determines how to render the faces of polygons in the scene, given the illumination
+
+### Light Source Models
+
+- **Point Source (a)**: All light rays originate at a point and radially diverge.
+
+- **Parallel source (b)**: Light rays are all parallel. May be modelled as a point source at infinite distance (the sun).
+
+- **Distributed source (c)**: All light rays originate at a finite area in space. It models a nearby source, such as a fluorescent light
+
+### Shading techniques
+
+There are two types of shading:
+- Flat Shading: No interpolation
+- Smooth Shading: Linear change (interpolation)
+
+<img src="shading.png" alt="550" width="550">
+
+### Flat Shading
+
+In flat shading the same values are used to render the entire polygon. Misses out on shading variations
+
+Why even use flat shading?
+- It is much faster and simpler to compute when compared to smooth shading.
+- Realistic in certain cases, like for example:
+    - Polygon is small enough
+    - Eye is very far away (Mach Band Effect is not as noticeable)
+
+### Mach Band Effect
+
+Exaggerates the contrast between edges of the slightly differing shades of a colour, as soon as they contact one another
+
+Triggered by edge-detection enabled by the human eye, it
+accentuates the discontinuity at the boundary
+
+### Smooth Shading
+
+With smooth shading the lightning is computed at multiple points on each polygon
+
+As a result, there is no Mach Band Effect
+
+The most popular methods of implementing smooth shading are:
+- Gouraud shading
+- Phong shading
+
+#### Gouraud Shading
+
+<img src="flat-gouraud.png" alt="550" width="550">
+
+- Lighting calculated for each polygon vertex
+- Colours are interpolated for the interior pixels
+- Linear change from one vertex colour to another
+
+##### Algorithm:
+
+The Gouraud Shading Algorithm follows 3 main steps:
+1. Determine the normal at each polygon vertex (average of the normal of adjacent faces)
+2. Apply an illumination model to each vertex to calculate the vertex intensity
+3. Linearly interpolate the vertex intensities over the surface polygon
+
+##### Drawbacks:
+
+- Assumes linear change across the polygon
+- If a polygon surface has a high curvature, then the shading can be inaccurate
+
+#### Phong Shading
+
+Phong shading is similar to Gouraud, except it interpolates the surface normals, and does full shading calculation at every pixel using these interpolated normals
+
+It is typically much slower than Gouraud shading, but does a much better job of handling highlights than Gouraud shading
+
+##### Algorithm
+
+The Phong Shading Algorithm follows 3 main steps:
+1. Determine the normal at each polygon vertex (average of the normal of adjacent faces)
+2. Linearly interpolate the vertex normals over the surface polygon
+3. Apply the illumination model along each scan line to calculate intensity of each surface point
+
+#### Gouraud vs Phong Shading
+
+Gouraud shading (left) and Phong shading (right) with a highlight falling at left vertex
+
+<img src="gouraud-phong1.png" alt="550" width="550">
+
+Gouraud shading for instance will miss highlights in the middle of polygons as it only applies the lighting model at the vertices. This can be overcome to some extent by using more polygons
+
+<img src="gouraud-phong2.png" alt="550" width="550">
+
+### Cel Shading
+
+Cel Shading (also known as toon shading) is a non-realistic shading technique aimed at making objects look like comic books
+
+### Textures
+
+After creating an object within a 3D scene, it is then possible to apply a **texture**
+
+### Texture mapping
+
+Texture mapping maps a planar image (typically 2D) onto a threedimensional object, adding visual detail
+
+### Texture mapping caveats 
+
+#### Texture map may be smaller than the surface:
+- if you replicate the texture, the image may not look natural
+- If you do not replicate the texture, then the texture will not cover the whole surface
+
+#### Texture Synthesis
+
+**Texture Synthesis** can address this problem, but only works in random looking textures
+
+Generate synthetic textures of arbitrary size based on the
+characteristics of a sample input image
