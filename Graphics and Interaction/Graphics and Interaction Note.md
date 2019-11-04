@@ -512,7 +512,7 @@ It is typically much slower than Gouraud shading, but does a much better job of 
 ##### Algorithm
 
 The Phong Shading Algorithm follows 3 main steps:
-1. Determine the normal at each polygon vertex (average of the normal of adjacent faces)
+1. Determine the normal at each polygon vertex (average of the normal of adjacent faces) **Help you decide the direction of the light that comes from the polygon**
 2. Linearly interpolate the vertex normals over the surface polygon
 3. Apply the illumination model along each scan line to calculate intensity of each surface point
 
@@ -540,7 +540,7 @@ Texture mapping maps a planar image (typically 2D) onto a threedimensional objec
 
 ### Texture mapping caveats 
 
-#### Texture map may be smaller than the surface:
+#### 1. Texture map may be smaller than the surface:
 - if you replicate the texture, the image may not look natural
 - If you do not replicate the texture, then the texture will not cover the whole surface
 
@@ -550,3 +550,21 @@ Texture mapping maps a planar image (typically 2D) onto a threedimensional objec
 
 Generate synthetic textures of arbitrary size based on the
 characteristics of a sample input image
+
+#### 2. When applying the same texture across multiple objects, it may be necessary to correctly align them
+
+### Displacement mapping
+
+Displaces each point on the surface. Texture values gives amount to move in direction normal to surface
+
+<img src="displacement-shading.png" alt="550" width="550">
+
+### Bump mapping
+
+Used to generate rough surfaces, without increasing the number of polygons
+
+The surface does not change, but shading makes it look like it did. Convincing at a distance, not so much when up close.
+
+Can be used to add realism to textures (e.g., orange peel)
+
+<img src="displacement-bump.png" alt="550" width="550">
