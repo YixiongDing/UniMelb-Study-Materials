@@ -89,6 +89,7 @@ _ _ _
 
 - Converts vector information (composed of shapes or primitives) into a raster image (composed of pixels) for the purpose of displaying real-time 3D graphics
 <img src="culling.png" alt="550" width="550">
+
 - Performs culling
 
 ##### Culling
@@ -432,6 +433,14 @@ Hitboxes are simplified bounding volumes as they are used to detect one-way coll
 ## Lecture 7: Surface Rendering and Shading
 - - - 
 
+- Shading model vs illumination model
+- Shading techniques
+    - Flat shading
+    - Smooth shading (Gouraud and Phong)
+- Texture mapping
+- Bump mapping
+- Displacement mapping
+
 ### Shading Vs Illumination Model
 
 There is a difference between the shading model and the illumination model used in rendering scenes
@@ -568,3 +577,402 @@ The surface does not change, but shading makes it look like it did. Convincing a
 Can be used to add realism to textures (e.g., orange peel)
 
 <img src="displacement-bump.png" alt="550" width="550">
+
+- - -
+## Lecture 8: Illumination Models
+- - -
+
+### Introduction to Illumination
+
+- How does light interact with object surfaces?
+
+- Useful to understand illumination models and surface properties for realistic shading
+
+### Shading and Illumination
+
+In real scenes, there is a variation of shading over object surfaces caused by:
+
+- surface material properties
+- orientation of surfaces
+- nature and direction of light sources
+- view direction
+- shadows
+
+#### Surface Types
+
+In order to create realistic renderings by computer graphics, we need to attempt to simulate this shading for different kinds of surfaces:
+
+##### Self-luminous
+
+Object that has in itself the property of emitting
+light
+
+Example: some kinds of jelly fish that glow in dark or radioactive isotopes
+
+##### Refractive
+
+Change in the direction of light cause by a change in
+transmission medium
+
+Examples: water or glass
+
+##### Translucent
+
+Light interacts in more complex way, e.g scatters
+
+Example: Certain minerals
+
+##### Reflective (diffuse)
+
+Light is reflected from a surface in many different
+angles
+
+Examples: Rugged surfaces (e.g., carpet)
+
+##### Reflective (specular)
+
+Light is reflected from a surface in the same angle as
+the incident ray
+
+Examples: Glossy surfaces (e.g. polished steel)
+
+### Isotropic Surfaces
+
+In isotropic surfaces the relationship between the incoming (or incident) and outgoing (or reflected) direction of light is the same over the whole surface (otherwise anisotropic)
+
+Illumination models generally most often consider isotropic surfaces only, however:
+
+- Certain kinds of material (such as velour) and certain rock or stone faces (look different depending on angle that you view them)
+
+- This is a result of their asymmetric texture
+
+### Which Illumination Model to Use?
+
+The choice of illumination model is a compromise between modelling the physics fully, and the computational cost
+
+- **Simple illumination models** do not consider shadows, reflections or photon-based effects (such as radiosity)
+
+- In **full ray tracing** one considers all rays of light and their recursive interaction between each object — very computationally complex!
+
+- **Decide model limitations**, e.g. how many time will we recurse (in other words how many times will we allow for re-reflection) ?
+
+### Components of light
+
+There are three components of light:
+
+#### Ambient component
+
+The simplest kind of shading is that from ambient illumination, that is, light that comes uniformly from all directions.
+
+The radiated light intensity ***(I)*** :
+
+<img src="ambient.png" alt="550" width="550">
+
+#### Lambertian (diffuse) component
+
+- The brightness depends only on the angle θ between the direction (L) to the light source and the surface normal (N).
+
+- This is the so-called Lambertian reflection (or matte, or diffuse or body reflection—all these terms are used.)
+
+- In Lambertian reflection light is re-radiated uniformly in all directions
+
+- Specular component
+
+- - - 
+## Lecture 9: Particle Systems
+- - -
+
+- Particle Systems
+    - Mostly generated in the Geometry Shader
+    -Collection of many small particles to represent a fuzzy object (waves, fire, smoke, etc)
+- Generated particles’ attributes
+    - Age, lifespan, colour, size, shape
+- Life cycle of a particle
+    - Generation, Dynamics, Extinction
+- Sprites (2D) vs Voxels (3D)
+
+### Geometry shaders
+
+The primary use of the geometry shader (introduced in DirectX10) is to create new primitives from existing ones
+
+It is most useful in creating ***particle systems***
+
+### Particle systems
+
+The term particle system was coined by William T. Reeves, a
+researcher at Lucasfilms while working on the film Star Trek II: The Wrath of Khan.
+
+The plot of the movie entailed shooting a torpedo (Genesis Device) at a barren planet, and terraform it (via a wall of fire ripples) in order for it to become a habitable world for colonisation.
+
+Reeves and his team developed the technique to represent this effect during the movie
+
+### Uses of particle systems
+
+Since then, particle systems have been used extensively in computer graphics in cinema, animations, digital art and video games.
+
+Particle systems are used to model various irregular types of natural phenomena, such as:
+- Fire
+- Smoke
+- Waterfalls
+- Fog
+- Bubbles
+- Explosions
+- Etc
+
+### Criteria
+
+All particle systems follow two main criteria:
+
+**Collection of particles** - A particle system is composed of one or more individual particles. Each of these particles has attributes that directly or indirectly effect the behaviour of the particle or ultimately how and where the particle is rendered
+
+**Stochastically defined attributes** - The other common
+characteristic of all particle systems is the introduction of some type of random element via stochastic limits (bounds, variance, distribution). This random element can be used to control the particle attributes
+
+### Attributes
+
+The small particles can gave a number of different attributes such as:
+- Emission (speed, spread, rate)
+- Age (time that a particle has been alive)
+- Lifespan (infinite, constant, variable)
+- Opacity (static, dynamic)
+- Colour (static, dynamic)
+- Size
+- Shape
+
+### Life cycle
+
+Each particle in a particle system goes through three different phases:
+
+#### Generation
+
+- Particles in the system are generated randomly within a predetermined location of the fuzzy object
+
+- This space is termed the generation shape of the fuzzy object, and this generation shape may change over time
+
+- Each of the above mentioned attribute is given an initial value. These initial values may be fixed or may be determined by a stochastic process
+
+#### Dynamics
+
+- The attributes of each of the particles may vary over time.
+    - Example: the colour of a particle in an explosion may get darker as it gets further from the centre of the explosion, indicating that it is cooling off
+
+- In general, each of the particle attributes can be specified by an equation with time as the parameter
+
+- Particle attributes can be functions of both time and other particle attributes
+    - Example: particle position is going to be dependent on previous particle position and velocity as well as time
+
+#### Extinction
+
+When the particle age matches it's lifetime it is destroyed. In addition there may be other criteria for terminating a particle prematurely:
+
+- **Running out of bounds** - If a particle moves out of the viewing area and will not re-enter it, then there is no reason to keep the particle active
+
+- **Hitting the ground** - It may be assumed that particles that run into the ground burn out and can no longer be seen
+
+- **Some attribute reaches a threshold** - For example, if the particle colour is so close to black that it will not contribute any colour to the final image, then it can be safely destroyed
+
+### Rendering
+
+What if you render the entire life cycle of each particle simultaneously?
+
+This will result in static (instead of animated) particles, useful to simulate certain materials, such as hair, fur or grass
+
+Particle simulations can be achieved via:
+
+#### Sprite (2D) particle systems
+
+A sprite is a textured quad. Sprite dimensions and position are usually controlled by two sets of values:
+
+- the anchor point position
+- the sprite dimensions
+
+#### Voxel (3D) particle systems
+
+Voxels are essentially 3D pixels
+
+Voxels are quite widely used in cinema—since online performance is less of an issue (can be computationally challenging!)
+
+- - -
+## Lecture 10: Input mechanisms
+- - -
+
+- Evolution of Input Mechanisms
+    - G evolution
+- Touch Interfaces
+    - Revolution in how we think about CG Applications
+- Sensor-Based Interaction
+    - Gyroscope, accelerometer, e
+
+### Keyboard
+
+#### Layout – QWERTY
+
+- Standardised layout
+- QWERTY arrangement not optimal for typing
+    - layout to prevent typewriters jamming!
+- Alternative designs allow faster typing but large social base of QWERTY typists produces reluctance to change
+
+### Mouse
+
+### Eye-tracking 
+
+- Control interface by eye gaze direction
+- Uses laser beam reflected off retina
+- Potential for hands-free control
+- Cheaper and lower accuracy devices available sit under the screen like a small webcam
+
+### Touch
+
+- Speed: Faster in many operations when compared to a traditional keyboard or mouse
+
+- Ease of use: Intuitive, requires less coordination
+
+- Accessibility: Help users with physical limitations when they interact with devices
+
+- Device size: Saves space, more area to interact
+
+### Sensors
+
+Most mobile devices will include a number of sensors that can be used as game inputs, such as:
+- Ambient Light Sensor
+- Accelerometer
+- Gyroscope (for measuring angular velocity)
+- GPS
+- Proximity sensors
+- Compass
+- Others
+
+It is important to check for the presence of sensors before attempting to use their input
+
+#### Accelerometer
+
+Probably the most useful of these sensors (for gameplay) is the accelerometer. This measures acceleration along the three principal axis. Unity will handle changes in orientation for you, but other frameworks you use may not do so
+
+#### Gyroscope
+
+Senses angular velocity produced by the sensor's own movement
+
+- - -
+## Lecture 11: Human Congnition
+- - -
+- Humans make mistakes!
+    - Proactive error prevention
+- Grabbing a User Attention
+    - Correct time and place
+    - Cues, highlighting, etc
+- Effective Use of Colour
+    - Contrast, avoid eye fatigue
+- Mental Models and Knowledge ”in-the-world”
+    - Learn by doing
+
+### Logical or ambiguous design
+### Good and bad design
+### Attention
+
+Users' attention is grabbed and held at the right moments; users aren't distracted when paying attention to something important 
+
+To grab the attention, an interface should exploit the use of effective principles of design, such as:
+- Color
+- Font
+- Weight
+- Sound
+- Cues
+- Highlighting
+
+### Using Colour 
+
+- Blue should be used in large areas and not thin lines
+- Red and green in the center of the field of view (edges of retina not sensitive to these colors)
+- Black, white, yellow in periphery  (edge)
+
+#### Avoid Eye Fatigue Colors
+
+- Avoid pairing blue and red, or blue and yellow
+- Green text on red background or red text on green / blue background
+
+#### Account for those with colour blindness
+
+### Memory
+
+There are three types of memory function:
+- Sensory memories (Buffers for stimuli received through senses, continuously overwritten)
+- Short-term memory or working memory (rapid access ~ 70ms, rapid decay ~ 200ms, limited capacity - 7± 2 chunks)
+- Long-term memory (slow access ~ 1/10 second, slow decay, huge or unlimited capacity)
+
+- - -
+### Lecture 12: Virtual Reality
+- - -
+
+- What is VR?
+    - Series of inputs and outputs experience in a virtual environment
+- History of Virtual Environments
+    - Rapid evolution of hardware
+- Applications of VR
+    -Entertainments, Art, Training, Education, Design, Health, etc
+- Still many open challenges...
+    Gorilla arm, object manipulation, body misalignment, motion sickness, field-of-view, etc
+
+### What is VR?
+
+- Embodied sensory experience of a virtual environment
+- A series of inputs and outputs
+
+### Gorilla Arm
+
+VR videos show smiling users holding their arms up for extended periods. But that will cause shoulder pain
+
+The Consumed Endurance Model estimates that a user can hold arm up for just 90 seconds before starting to fatigue
+
+### Object Manipulation
+
+- Our hands have evolved to manipulate objects, not ”poking in-the-air”
+
+- Inferior means of interaction due to lack of mechanoreceptive  feedback
+
+- Simple actions like pressing a button or hitting a ball become challenging
+
+- Vision-based methods for tracking hand movements are quite robust, but tracking of hands with objects is still a major challenge
+
+- Only manageable when the user is slow and there are minimal occlusions
+
+- **Potential solutions**: 
+    1. Gloves (clumsy, unhygienic)
+    2. Consider only applications that don’t require contact
+    3. Instrumented environments for haptic feedback
+
+### Gesturing
+
+- Gesturing is not ”natural” and can be awkward
+
+- Assumption that users are willing to spend time learning new gestures, or restrict to simple pointing-and-pinching type gestures that users are use to
+
+### Body Misalignment
+
+- The virtual and physical body will never be perfectly aligned in time and space
+- User cannot rely on their senses as they normally would due to coordinate disturbance and temporal asynchrony
+
+### Text Entry
+
+- VR does not perform well when considering tasks that require fast and precise motor control, such as text entry
+
+### Motion Sickness
+
+Open problem since the first VR prototypes
+
+Has gotten better with better hardware, but still an important problem
+
+### Summary
+
+Virtual Reality enables users to experience immersive sensory
+experiences of a virtual environment
+
+- VR has come a long way from its humble beginnings. Current VR systems are more immersive and usable than ever before 
+
+- In recent years we have seen a significant increase of application areas for VR, such as entertainment, training, urban planning, etc
+
+- However, there are still many open interaction challenges in VR that need to addressed before we can observe a much wider adoption
+
+- - -
+## Lecture 13: Augmented and Mixed Reality
+- - -
+
