@@ -79,3 +79,76 @@ These five SOLID principles are:
 
 By applying these principles during to design object oriented systems, it can be noticed that some structures appears repeatedly over and over again which are known as design patterns
 
+- - -
+## Chapter 2: Organising Domain Logic – Principle and Patterns
+- - -
+
+Typically, an enterprise system is divided into the presentation, domain logic, and data source layers
+
+In this chapter, we will look at three architectural design patterns and principles for use in the domain logic layer in enterprise systems
+
+### Patterns for domain logic layer
+
+1. Transaction script
+2. Domain model
+3. Table module
+4. Service layer
+
+### The problem
+
+#### How do we organise the domain logic of an enterprise system to make it understandable and maintainable?
+
+The domain layer design:
+1. should be structured make it clear how to identify the transactions that it supports
+2. and the effects these transactions have on the domain
+3. be extensible so that new types of transactions and new business rules can be added while minimising the change impact on the rest of the layer, and the system in general
+
+### The patterns
+
+#### Transaction Script
+
+Organises business logic by procedures where each procedure handles a single requirement from the presentation
+
+##### **Transaction**: 
+
+Read some information from the system, modify some information in the system, calculate some new information, or any combination of the three. Captures some business logic that is used to support an enterprise
+
+##### **Transaction script pattern**: 
+
+Organises the domain layer such that each transaction is organised into a single procedure (or script), with common behaviour factored into shared subprocedures. In general, these scripts should not interact, and there should be no dependencies between them
+
+##### **Implementation**
+
+The common theme is:
+1. A single method/procedure for each transcript
+2. This method/procedure can use other methods/procedures to execute the transaction
+3. Each transaction is served by exactly one script, and each script serves exactly one transaction
+
+##### **Pros**
+
+1. *Simplicity*:
+    - Major attraction of the transaction script pattern is its simplicity
+    - Simple to model and understand
+    - Knows the transactions of the system, straightforward to find the corresponding behaviour
+    - Maintenance is straightforward because one needs only to learn about a single transaction to modify it
+
+2. *Transaction boundaries*:
+    - Straightforward to identify the transaction boundaries (where a transaction starts and ends)
+    - Each transaction is opened at the start of its corresponding transaction script, and closed at the end of its transaction script
+
+##### **Cons**
+
+1. *Scalability*:
+    - Does not scale well. As the business logic increases in complexity, the complexity of the domain layer increases exponentially
+
+2. *Duplication:*:
+    - Tends to result in duplicate code. Because a transaction script can be understood in isolation, and indeed implemented by different develops, there tends to be no over-arching view of the different transactions. 
+    The common behaviour tends to be difficult to spot because: 
+        - (a) the common behaviour will be implemented in different ways by different developers;
+        - (b) generally no single person understands how all of the transactions are implemented, and the structure of the patterns encourages this
+
+
+#### Domain model
+
+An object model of the domain that incorporates both behaviour and data
+
