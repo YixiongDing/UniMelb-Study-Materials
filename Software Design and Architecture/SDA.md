@@ -152,3 +152,67 @@ The common theme is:
 
 An object model of the domain that incorporates both behaviour and data
 
+The domain model pattern involves constructing a model of the business domain of the system, usually an object-oriented model, and then coupling the behaviour to the objects in the domain using methods
+
+##### Implementation
+
+Two broad approaches, in both approaches the domain model itself is the same, however, the way that the objects are created differs:
+
+1. For small applications with a small number of objects:
+    1. Simply load the object graph from a file and place it into memory
+    2. For larger applications, this takes up too much memory
+
+2. An alternative approach：
+    1. Store the information required in a database, and then only create the objects as required
+        1. Create objects 
+        2. Execute the domain logic
+        3. Destroy the objects
+    2. If the object graph is required over multiple transaction calls, it can either be created each time, or stored as part of the session state
+
+##### Pros:
+
+1. *Extensibility*: 
+    1. Major attraction of the domain model pattern is that to add more behaviour
+    2. Add the classes/objects to the domain model, and how to create these
+    3. if a system has changing business rules or complex calculations/validations, the domain model pattern is highly suitable
+
+2. *Managing domain complexity*：
+    1. More natural fit to the business logic than a transaction script approach - the domain logic itself reflects the business domain
+
+3. *Re-usability*:
+    1. The domain model can be re-used in other applications - the logic attached to the domain objects may be application specific
+    2. The high-level model itself is a primary candidate for this
+    3. A transaction script, on the other hand, is unlikely to be re-usable unless the same transaction occurs in a different system
+
+##### Cons
+1. *Complexity:*:
+    1. A major con is the complexity of the approach itself
+    2. For a system with a handful of simple transactions, it's not worthy to use domain model as: 
+        1. the added effort of creating a domain model
+        2. implementing it
+        3. and mapping between the database and domain model 
+        
+
+2. *Experience:*:
+    1. A development team unfamiliar with using the domain model pattern will require significant effort to make the paradigm shift
+    2. Transaction scripts, on the other hand, do not seem to suffer from this problem to the same extent
+
+#### Table Module
+
+A single instance that handles the business logic for all rows in a database table or view
+
+The table module pattern attempts to blend the transaction pattern and domain model patterns. It is a modification of the domain model pattern that ties the behaviour of the business rules to individual database tables
+
+##### Pros
+
+1. *Simplicity*：
+    1. The implementation is simple, like the transaction script pattern, but is organised around tables instead of actions
+
+2. *Lack of duplication*：
+    1. less duplicate code than the transaction script, because behaviour is tied to the concepts/classes
+
+
+##### Cons
+
+1. *Scalability*:
+    1. 
