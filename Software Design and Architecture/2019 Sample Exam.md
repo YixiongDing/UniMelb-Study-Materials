@@ -53,3 +53,41 @@ Two approaches:
 
 2. Alternatively: store the information required in a database, and then only create the objects as required
 
+### Question 3 [3 Marks] The first law of distributed object design is: Do not distribute objects. Using an example, state why you either agree or disagree with this law
+
+I agree. 
+
+The reasons:
+
+1. For high cohesion. objects hold only a small amount of related data types
+
+2. Their interfaces should allow fine-grained access to this data. However, such an approach results in many small calls
+
+3. Querying an object over a network (remote method calling) is extremely costly in compared to local method calling
+
+4. When distributing objects, remote calls made between processes are an order of magnitude slower than local method calls. Remote calls made to another machine are an order of magnitude slower than remote calls on the same machine
+
+### Question 4 [3 Marks] What is a long transaction? Briefly explain two methods that can be used to mitigate concurrency issues in long transactions.
+
+Long transaction: a transaction that spans two or more requests to the system
+
+Methods:
+
+1. Optimistic offline lock An optimistic lock is a late transaction pattern that validates the changes about to be committed in one session do not conflict with changes in another
+
+2. Pessimistic offline lock: A pessimistic lock is a long transaction pattern that aims to prevent this by locking the required data over the entire business transaction. Thus, it prevents the “end of transaction” failures by avoiding conflicts all together
+
+### Question 5 [3 Marks] Compare and contrast the model-view-controller and the model-view-presenter design patterns.
+
+Both MVC and MVP patterns abstract the logic related to presentation to three modules: 
+
+1. Model: Model represents the information about the domain
+2. View: View deals with the display of information to the client through a user interface
+3. Presenter/Controller: Handles the interactions between the view and the model
+
+The main difference between the two patterns lie in the interactions of the view and the model. In the MVC pattern the view directly queries the model while in the MVP pattern the view is managed by the presenter.
+
+In the context of the layered architecture, the view and the presenter/controller are on the layer above the model layer. Both these patterns provide a clear separation between the model layer and the upper layer (view-presenter/controller) layer, however, less separation is provided between the view and the controller/presenter.
+
+
+### Question 6 [3 Marks] Name and briefly describe three design patterns for enterprise integration.
