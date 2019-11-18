@@ -91,3 +91,15 @@ In the context of the layered architecture, the view and the presenter/controlle
 
 
 ### Question 6 [3 Marks] Name and briefly describe three design patterns for enterprise integration.
+
+1. File transfer
+
+    Uses files to transfer data/information between multiple applications
+
+2. Shared Database
+
+    Uses a shared database to transfer data/information between multiple applications
+
+3. Messaging
+    
+    Uses messages to transfer data/information between multiple applications
